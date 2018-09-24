@@ -13,9 +13,9 @@ public class IntegerUtilTest {
     {
         qt().forAll(integers().all())
             .checkAssert(
-                value -> {
+                number -> {
                     for (int bit = 1, i = 0; bit != 0; bit <<= 1, ++i) {
-                        assertEquals(IntegerUtil.setBit(value, i), value | bit);
+                        assertEquals(IntegerUtil.setBit(number, i), number | bit);
                     }
                 });
     }
@@ -25,9 +25,9 @@ public class IntegerUtilTest {
     {
         qt().forAll(integers().all())
             .checkAssert(
-                value -> {
+                number -> {
                     for (int bit = 1, i = 0; bit != 0; bit <<= 1, ++i) {
-                        assertEquals(IntegerUtil.clearBit(value, i), value & (~bit));
+                        assertEquals(IntegerUtil.clearBit(number, i), number & (~bit));
                     }
                 });
     }
@@ -37,27 +37,27 @@ public class IntegerUtilTest {
     {
         qt().forAll(integers().all())
             .checkAssert(
-                value -> {
+                number -> {
                     for (int numBytes = 0; numBytes < Integer.BYTES; ++numBytes) {
-                        int result = IntegerUtil.clearHighBytes(value, numBytes);
+                        int result = IntegerUtil.clearHighBytes(number, numBytes);
                         switch (numBytes) {
                             case 0:
                                 assertEquals(result, 0);
                                 break;
                             case 1:
-                                assertEquals(result, value & 0xFF);
+                                assertEquals(result, number & 0xFF);
                                 break;
 
                             case 2:
-                                assertEquals(result, value & 0xFFFF);
+                                assertEquals(result, number & 0xFFFF);
                                 break;
 
                             case 3:
-                                assertEquals(result, value & 0xFFFFFF);
+                                assertEquals(result, number & 0xFFFFFF);
                                 break;
 
                             case 4:
-                                assertEquals(result, (int) value);
+                                assertEquals(result, (int) number);
                                 break;
                             default:
                                 fail();
@@ -73,9 +73,9 @@ public class IntegerUtilTest {
     {
         qt().forAll(integers().all())
             .checkAssert(
-                value -> {
+                number -> {
                     for (int bit = 1, i = 0; bit != 0; bit <<= 1, ++i) {
-                        assertEquals(IntegerUtil.isBitSet(value, i), (value & bit) != 0);
+                        assertEquals(IntegerUtil.isBitSet(number, i), (number & bit) != 0);
                     }
                 });
     }
@@ -85,9 +85,9 @@ public class IntegerUtilTest {
     {
         qt().forAll(integers().all())
             .checkAssert(
-                value -> {
+                number -> {
                     for (int bit = 1, i = 0; bit != 0; bit <<= 1, ++i) {
-                        assertEquals(IntegerUtil.getBit(value, i), (value & bit) >>> i);
+                        assertEquals(IntegerUtil.getBit(number, i), (number & bit) >>> i);
                     }
                 });
     }
@@ -97,15 +97,15 @@ public class IntegerUtilTest {
     {
         qt().forAll(integers().all())
             .checkAssert(
-                value -> {
+                number -> {
                     for (int length = 1, mask = 1;
                          length <= Integer.SIZE;
                          ++length, mask = (mask << 1) | 1) {
                         for (int start = 0; start < Integer.SIZE; ++start) {
-                            assertEquals(IntegerUtil.getBitsSlice(value,
+                            assertEquals(IntegerUtil.getBitsSlice(number,
                                                                   start,
                                                                   start + length - 1),
-                                         (value >>> start) & mask);
+                                         (number >>> start) & mask);
                         }
                     }
                 });
@@ -116,24 +116,24 @@ public class IntegerUtilTest {
     {
         qt().forAll(integers().all())
             .checkAssert(
-                value -> {
+                number -> {
                     for (int byteIndex = 0; byteIndex < Integer.BYTES; ++byteIndex) {
-                        byte result = IntegerUtil.getByte(value, byteIndex);
+                        byte result = IntegerUtil.getByte(number, byteIndex);
                         switch (byteIndex) {
                             case 0:
-                                assertEquals(result, (byte) (value & 0xFF));
+                                assertEquals(result, (byte) (number & 0xFF));
                                 break;
 
                             case 1:
-                                assertEquals(result, (byte) ((value & 0xFF00) >>> 8));
+                                assertEquals(result, (byte) ((number & 0xFF00) >>> 8));
                                 break;
 
                             case 2:
-                                assertEquals(result, (byte) ((value & 0xFF0000) >>> 16));
+                                assertEquals(result, (byte) ((number & 0xFF0000) >>> 16));
                                 break;
 
                             case 3:
-                                assertEquals(result, (byte) ((value & 0xFF000000) >>> 24));
+                                assertEquals(result, (byte) ((number & 0xFF000000) >>> 24));
                                 break;
 
                             default:

@@ -76,7 +76,7 @@ public final class LongUtil {
     };
 
     private static final long[] BYTE_SLICE_MASKS = {
-        0, 0xFF, 0xFFFF, 0xFFFFFF, 0xFFFFFFFF,
+        0L, 0xFFL, 0xFFFFL, 0xFFFFFFL, 0xFFFFFFFFL,
         0xFFFFFFFFFFL, 0xFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL
     };
 

@@ -1,11 +1,11 @@
 package io.github.elkin.bitty;
 
-import org.testng.annotations.Test;
-
 import static org.quicktheories.QuickTheory.qt;
 import static org.quicktheories.generators.SourceDSL.longs;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
+
+import org.testng.annotations.Test;
 
 public class LongUtilTest {
     @Test
@@ -45,19 +45,19 @@ public class LongUtilTest {
                                 assertEquals(result, 0);
                                 break;
                             case 1:
-                                assertEquals(result, number & 0xFF);
+                                assertEquals(result, number & 0xFFL);
                                 break;
 
                             case 2:
-                                assertEquals(result, number & 0xFFFF);
+                                assertEquals(result, number & 0xFFFFL);
                                 break;
 
                             case 3:
-                                assertEquals(result, number & 0xFFFFFF);
+                                assertEquals(result, number & 0xFFFFFFL);
                                 break;
 
                             case 4:
-                                assertEquals(result, number & 0xFFFFFFFF);
+                                assertEquals(result, number & 0xFFFFFFFFL);
                                 break;
 
                             case 5:

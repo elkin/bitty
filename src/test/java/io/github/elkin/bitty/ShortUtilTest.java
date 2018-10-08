@@ -14,7 +14,7 @@ public class ShortUtilTest {
     qt().forAll(integers().between(Short.MIN_VALUE, Short.MAX_VALUE))
         .checkAssert(
             number -> {
-              for (short bit = 1, i = 0; bit != 0; bit <<= 1, ++i) {
+              for (short bit = 1, i = 0; bit != 0; bit = (short)(bit << 1), ++i) {
                 assertEquals(ShortUtil.setBit(number.shortValue(), i), number | bit);
               }
             });
@@ -25,7 +25,7 @@ public class ShortUtilTest {
     qt().forAll(integers().between(Short.MIN_VALUE, Short.MAX_VALUE))
         .checkAssert(
             number -> {
-              for (short bit = 1, i = 0; bit != 0; bit <<= 1, ++i) {
+              for (short bit = 1, i = 0; bit != 0; bit = (short)(bit << 1), ++i) {
                 assertEquals(ShortUtil.clearBit(number.shortValue(), i), number & (~bit));
               }
             });
@@ -72,7 +72,7 @@ public class ShortUtilTest {
     qt().forAll(integers().between(Short.MIN_VALUE, Short.MAX_VALUE))
         .checkAssert(
             number -> {
-              for (short bit = 1, i = 0; bit != 0; bit <<= 1, ++i) {
+              for (short bit = 1, i = 0; bit != 0; bit = (short)(bit << 1), ++i) {
                 assertEquals(ShortUtil.isBitSet(number.shortValue(), i),
                     (number & bit) != 0);
               }
@@ -136,7 +136,7 @@ public class ShortUtilTest {
 
   @Test
   public void numberOfBytes() {
-    for (short bit = 1, i = 0; bit != 0; bit <<= 1, ++i) {
+    for (short bit = 1, i = 0; bit != 0; bit = (short)(bit << 1), ++i) {
       assertEquals(ShortUtil.numberOfBytes(bit), (i / Byte.SIZE) + 1);
     }
   }

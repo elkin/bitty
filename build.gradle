@@ -3,6 +3,10 @@ plugins {
     id 'jacoco'
 }
 
+jacoco {
+    toolVersion "0.8.2"
+}
+
 group 'io.github.elkin'
 version '1.0-SNAPSHOT'
 

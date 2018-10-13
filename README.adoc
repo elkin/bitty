@@ -1,6 +1,7 @@
 = bitty
 
 image:https://travis-ci.org/elkin/bitty.svg?branch=master["Build Status", link="https://travis-ci.org/elkin/bitty"]
+image:https://codecov.io/gh/elkin/bitty/branch/master/graph/badge.svg["Coverage", link="https://codecov.io/gh/elkin/bitty/tree/master"]
 
 bit manipulation library
 

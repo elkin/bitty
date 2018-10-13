@@ -1,5 +1,7 @@
 = bitty
 
+image:https://travis-ci.org/elkin/bitty.svg?branch=master["Build Status", link="https://travis-ci.org/elkin/bitty"]
+
 bit manipulation library
 
 == How it is organized

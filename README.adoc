@@ -1,0 +1,45 @@
+= bitty
+
+bit manipulation library
+
+== How it is organized
+
+The library provides three utility classes for bit manipulation:
+
+* link:src/main/java/io/github/elkin/bitty/IntegerUtil.java[IntegerUtil]
+* link:src/main/java/io/github/elkin/bitty/LongUtil.java[LongUtil]
+* link:src/main/java/io/github/elkin/bitty/ShortUtil.java[ShortUtil]
+
+Each utility class provides bit manipulation operations for a corresponding type.
+
+For each type(`int`, `long`, `short`) following bit manipulation operations are implemented:
+
+* get bits slice
+* get bit by index
+* check if bit is set
+* set bit by index
+* clear bit by index
+* get byte
+* get number of non-zero bytes
+
+IMPORTANT: Lowest bit and byte index is zero.
+
+== Examples
+
+[source,java]
+----
+int value = IntegerUtil.getBitsSlice(0xFEFE, 0, 7);
+// value is equal to 0xFE
+
+long bit = LongUtil.setBit(0x80L, 3);
+// bit is equal to 0x88L
+
+byte b = ShortUtil.getByte((short)0x8880, 1);
+// b is equal to 0x88
+----
+
+== Tests
+
+All bit manipulation operations are tested. See coverage on the badge. You can find tests in the directory link:src/test/java/io/github/elkin/bitty[src/test/java/io/github/elkin/bitty].
+
+Tests use nice library for property based testing: link:https://github.com/ncredinburgh/QuickTheories[QuickTheories].

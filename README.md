@@ -1,2 +1,0 @@
-# bitty
-bit manipulation library

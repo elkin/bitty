@@ -22,7 +22,7 @@ dependencies {
 }
 
 test {
-    enableAssertions: true
+    enableAssertions true
     useTestNG()
 }
 

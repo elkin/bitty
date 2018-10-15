@@ -32,19 +32,36 @@ public final class ShortUtil {
       0xEFFF, 0xDFFF, 0xBFFF, 0x7FFF,
   };
 
-  private ShortUtil() {
-  }
-
-  public static short getBitsSlice(short value, int startIndex, int stopIndex) {
+  private static void checkSliceAsserts(int startIndex, int stopIndex)
+  {
     assert startIndex >= 0;
     assert startIndex < Short.SIZE;
     assert stopIndex >= 0;
     assert stopIndex >= startIndex;
     assert stopIndex - startIndex <= Short.SIZE;
+  }
+
+  private ShortUtil() {
+  }
+
+  public static short getBitsSlice(short value, int startIndex, int stopIndex) {
+    checkSliceAsserts(startIndex, stopIndex);
 
     // it's very important to evaluate expression in the braces firstly
     // otherwise result value will be incorrectly evaluated.
     return (short) ((value & SHORT_MASKS[stopIndex]) >>> startIndex);
+  }
+
+  public static int setBitsSlice(short value, int startIndex, int stopIndex) {
+    checkSliceAsserts(startIndex, stopIndex);
+
+    return value | (SHORT_MASKS[stopIndex - startIndex] << startIndex);
+  }
+
+  public static int clearBitsSlice(int value, int startIndex, int stopIndex) {
+    checkSliceAsserts(startIndex, stopIndex);
+
+    return value & (~(SHORT_MASKS[stopIndex - startIndex] << startIndex));
   }
 
   public static short getBit(short value, int index) {

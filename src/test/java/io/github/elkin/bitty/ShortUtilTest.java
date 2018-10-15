@@ -40,6 +40,66 @@ public class ShortUtilTest {
   }
 
   @Test(expectedExceptions = AssertionError.class)
+  public void setBitsSliceNegativeStart()
+  {
+    ShortUtil.setBitsSlice((short)0, -1, 1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void setBitsSliceStartIndexIsGreaterOrEqualToShortSize()
+  {
+    ShortUtil.setBitsSlice((short) 0, Short.SIZE, Short.SIZE + 1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void setBitsSliceNegativeStopIndex()
+  {
+    ShortUtil.setBitsSlice((short) 0, 1, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void setBitsSliceStopIndexIsLessThanStartIndex()
+  {
+    ShortUtil.setBitsSlice((short) 0, 3, 2);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void setBitsSliceDifferenceBetweenStopAndStartIsGreaterThanShortSize()
+  {
+    ShortUtil.setBitsSlice((short) 0, 1, Short.SIZE + 2);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitsSliceNegativeStart()
+  {
+    ShortUtil.clearBitsSlice((short)0, -1, 1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitsSliceStartIndexIsGreaterOrEqualToShortSize()
+  {
+    ShortUtil.clearBitsSlice((short) 0, Short.SIZE, Short.SIZE + 1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitsSliceNegativeStopIndex()
+  {
+    ShortUtil.clearBitsSlice((short) 0, 1, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitsSliceStopIndexIsLessThanStartIndex()
+  {
+    ShortUtil.getBitsSlice((short) 0, 3, 2);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitsSliceDifferenceBetweenStopAndStartIsGreaterThanShortSize()
+  {
+    ShortUtil.clearBitsSlice((short) 0, 1, Short.SIZE + 2);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
   public void getBitNegativeIndex()
   {
     ShortUtil.getBit((short) 0, -1);
@@ -204,7 +264,47 @@ public class ShortUtilTest {
   }
 
   @Test
-  public void getByteIn() {
+  public void setBitsSlice() {
+    qt().forAll(integers().between(Short.MIN_VALUE, Short.MAX_VALUE))
+        .checkAssert(
+            number -> {
+              for (int length = 1, mask = 1;
+                  length <= Short.SIZE;
+                  ++length, mask = (mask << 1) | 1) {
+                for (int start = 0; start < Short.SIZE; ++start) {
+                  assertEquals(
+                      ShortUtil.setBitsSlice(
+                          number.shortValue(),
+                          start,
+                          start + length - 1),
+                      number | (mask << start));
+                }
+              }
+            });
+  }
+
+  @Test
+  public void clearBitsSlice() {
+    qt().forAll(integers().between(Short.MIN_VALUE, Short.MAX_VALUE))
+        .checkAssert(
+            number -> {
+              for (int length = 1, mask = 1;
+                  length <= Short.SIZE;
+                  ++length, mask = (mask << 1) | 1) {
+                for (int start = 0; start < Short.SIZE; ++start) {
+                  assertEquals(
+                      ShortUtil.clearBitsSlice(
+                          number.shortValue(),
+                          start,
+                          start + length - 1),
+                      number & (~(mask << start)));
+                }
+              }
+            });
+  }
+
+  @Test
+  public void getByte() {
     qt().forAll(integers().between(Short.MIN_VALUE, Short.MAX_VALUE))
         .checkAssert(
             number -> {

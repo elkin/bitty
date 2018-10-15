@@ -36,7 +36,7 @@ public class LongUtilTest {
     qt().forAll(longs().all())
         .checkAssert(
             number -> {
-              for (int numBytes = 0; numBytes < Long.BYTES; ++numBytes) {
+              for (int numBytes = 0; numBytes <= Long.BYTES; ++numBytes) {
                 long result = LongUtil.clearHighBytes(number, numBytes);
                 switch (numBytes) {
                   case 0:

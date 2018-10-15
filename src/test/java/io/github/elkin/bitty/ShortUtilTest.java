@@ -8,6 +8,108 @@ import static org.testng.Assert.fail;
 import org.testng.annotations.Test;
 
 public class ShortUtilTest {
+  
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceNegativeStart()
+  {
+    ShortUtil.getBitsSlice((short)0, -1, 1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceStartIndexIsGreaterOrEqualToShortSize()
+  {
+    ShortUtil.getBitsSlice((short) 0, Short.SIZE, Short.SIZE + 1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceNegativeStopIndex()
+  {
+    ShortUtil.getBitsSlice((short) 0, 1, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceStopIndexIsLessThanStartIndex()
+  {
+    ShortUtil.getBitsSlice((short) 0, 3, 2);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceDifferenceBetweenStopAndStartIsGreaterThanShortSize()
+  {
+    ShortUtil.getBitsSlice((short) 0, 1, Short.SIZE + 2);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitNegativeIndex()
+  {
+    ShortUtil.getBit((short) 0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitIndexIsGreaterOrEqualToIntegerSize()
+  {
+    ShortUtil.getBit((short) 0, Short.SIZE);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void isBitSetNegativeIndex()
+  {
+    ShortUtil.isBitSet((short) 0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void isBitSetIndexIsGreaterOrEqualToIntegerSize()
+  {
+    ShortUtil.isBitSet((short) 0, Short.SIZE);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void setBitNegativeIndex()
+  {
+    ShortUtil.setBit((short) 0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void setBitIndexIsGreaterOrEqualToIntegerSize()
+  {
+    ShortUtil.setBit((short) 0, Short.SIZE);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitNegativeIndex()
+  {
+    ShortUtil.clearBit((short) 0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitIndexIsGreaterOrEqualToIntegerSize()
+  {
+    ShortUtil.clearBit((short) 0, Short.SIZE);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearHighBytesNumBytesIsNegative()
+  {
+    ShortUtil.clearHighBytes((short) 0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearHighBytesNumBytesIsGreaterThanIntegerBytes()
+  {
+    ShortUtil.clearHighBytes((short) 0, Short.BYTES + 1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getByteNegativeIndex()
+  {
+    ShortUtil.getByte((short) 0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getByteIndexIsGreaterOrEqualToIntegerBytes()
+  {
+    ShortUtil.getByte((short) 0, Short.BYTES);
+  }
 
   @Test
   public void setBit() {

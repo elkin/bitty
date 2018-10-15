@@ -18,7 +18,7 @@ public class IntegerUtilTest {
   @Test(expectedExceptions = AssertionError.class)
   public void getBitsSliceStartIndexIsGreaterOrEqualToIntegerSize()
   {
-    IntegerUtil.getBitsSlice(0, 32, 33);
+    IntegerUtil.getBitsSlice(0, Integer.SIZE, Integer.SIZE + 1);
   }
 
   @Test(expectedExceptions = AssertionError.class)
@@ -36,7 +36,7 @@ public class IntegerUtilTest {
   @Test(expectedExceptions = AssertionError.class)
   public void getBitsSliceDifferenceBetweenStopAndStartIsGreaterThanIntegerSize()
   {
-    IntegerUtil.getBitsSlice(0, 1, 34);
+    IntegerUtil.getBitsSlice(0, 1, Integer.SIZE + 2);
   }
 
   @Test(expectedExceptions = AssertionError.class)
@@ -48,7 +48,7 @@ public class IntegerUtilTest {
   @Test(expectedExceptions = AssertionError.class)
   public void setBitsSliceStartIndexIsGreaterOrEqualToIntegerSize()
   {
-    IntegerUtil.setBitsSlice(0, 32, 33);
+    IntegerUtil.setBitsSlice(0, Integer.SIZE, Integer.SIZE + 1);
   }
 
   @Test(expectedExceptions = AssertionError.class)
@@ -66,7 +66,7 @@ public class IntegerUtilTest {
   @Test(expectedExceptions = AssertionError.class)
   public void setBitsSliceDifferenceBetweenStopAndStartIsGreaterThanIntegerSize()
   {
-    IntegerUtil.setBitsSlice(0, 1, 34);
+    IntegerUtil.setBitsSlice(0, 1, Integer.SIZE + 2);
   }
 
   @Test(expectedExceptions = AssertionError.class)
@@ -78,7 +78,7 @@ public class IntegerUtilTest {
   @Test(expectedExceptions = AssertionError.class)
   public void clearBitsSliceStartIndexIsGreaterOrEqualToIntegerSize()
   {
-    IntegerUtil.clearBitsSlice(0, 32, 33);
+    IntegerUtil.clearBitsSlice(0, Integer.SIZE, Integer.SIZE + 1);
   }
 
   @Test(expectedExceptions = AssertionError.class)
@@ -96,7 +96,7 @@ public class IntegerUtilTest {
   @Test(expectedExceptions = AssertionError.class)
   public void clearBitsSliceDifferenceBetweenStopAndStartIsGreaterThanIntegerSize()
   {
-    IntegerUtil.clearBitsSlice(0, 1, 34);
+    IntegerUtil.clearBitsSlice(0, 1, Integer.SIZE + 2);
   }
 
   @Test(expectedExceptions = AssertionError.class)

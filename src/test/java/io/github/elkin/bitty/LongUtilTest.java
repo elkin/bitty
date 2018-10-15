@@ -8,6 +8,108 @@ import static org.testng.Assert.fail;
 import org.testng.annotations.Test;
 
 public class LongUtilTest {
+  
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceNegativeStart()
+  {
+    LongUtil.getBitsSlice(0, -1, 1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceStartIndexIsGreaterOrEqualToLongSize()
+  {
+    LongUtil.getBitsSlice(0, Long.SIZE, Long.SIZE + 1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceNegativeStopIndex()
+  {
+    LongUtil.getBitsSlice(0, 1, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceStopIndexIsLessThanStartIndex()
+  {
+    LongUtil.getBitsSlice(0, 3, 2);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceDifferenceBetweenStopAndStartIsGreaterThanLongSize()
+  {
+    LongUtil.getBitsSlice(0, 1, Long.SIZE + 2);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitNegativeIndex()
+  {
+    LongUtil.getBit(0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitIndexIsGreaterOrEqualToIntegerSize()
+  {
+    LongUtil.getBit(0, Long.SIZE);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void isBitSetNegativeIndex()
+  {
+    LongUtil.isBitSet(0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void isBitSetIndexIsGreaterOrEqualToIntegerSize()
+  {
+    LongUtil.isBitSet(0, Long.SIZE);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void setBitNegativeIndex()
+  {
+    LongUtil.setBit(0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void setBitIndexIsGreaterOrEqualToIntegerSize()
+  {
+    LongUtil.setBit(0, Long.SIZE);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitNegativeIndex()
+  {
+    LongUtil.clearBit(0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitIndexIsGreaterOrEqualToIntegerSize()
+  {
+    LongUtil.clearBit(0, Long.SIZE);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearHighBytesNumBytesIsNegative()
+  {
+    LongUtil.clearHighBytes(0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearHighBytesNumBytesIsGreaterThanIntegerBytes()
+  {
+    LongUtil.clearHighBytes(0, Long.BYTES + 1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getByteNegativeIndex()
+  {
+    LongUtil.getByte(0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getByteIndexIsGreaterOrEqualToIntegerBytes()
+  {
+    LongUtil.getByte(0, Long.BYTES);
+  }
 
   @Test
   public void setBit() {

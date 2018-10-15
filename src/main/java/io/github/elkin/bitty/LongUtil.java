@@ -86,17 +86,34 @@ public final class LongUtil {
       0xFF00000000L, 0xFF0000000000L, 0xFF000000000000L, 0xFF00000000000000L
   };
 
-  private LongUtil() {
-  }
-
-  public static long getBitsSlice(long value, int startIndex, int stopIndex) {
+  private static void checkSliceAsserts(int startIndex, int stopIndex)
+  {
     assert startIndex >= 0;
     assert startIndex < Long.SIZE;
     assert stopIndex >= 0;
     assert stopIndex >= startIndex;
     assert stopIndex - startIndex <= Long.SIZE;
+  }
+
+  private LongUtil() {
+  }
+
+  public static long getBitsSlice(long value, int startIndex, int stopIndex) {
+    checkSliceAsserts(startIndex, stopIndex);
 
     return (value & LONG_MASKS[stopIndex]) >>> startIndex;
+  }
+
+  public static long setBitsSlice(long value, int startIndex, int stopIndex) {
+    checkSliceAsserts(startIndex, stopIndex);
+
+    return value | (LONG_MASKS[stopIndex - startIndex] << startIndex);
+  }
+
+  public static long clearBitsSlice(long value, int startIndex, int stopIndex) {
+    checkSliceAsserts(startIndex, stopIndex);
+
+    return value & (~(LONG_MASKS[stopIndex - startIndex] << startIndex));
   }
 
   public static long getBit(long value, int index) {

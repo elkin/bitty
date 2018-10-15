@@ -9,6 +9,108 @@ import org.testng.annotations.Test;
 
 public class IntegerUtilTest {
 
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceNegativeStart()
+  {
+    IntegerUtil.getBitsSlice(0, -1, 1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceStartIndexIsGreaterOrEqualToIntegerSize()
+  {
+    IntegerUtil.getBitsSlice(0, 32, 33);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceNegativeStopIndex()
+  {
+    IntegerUtil.getBitsSlice(0, 1, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceStopIndexIsLessThanStartIndex()
+  {
+    IntegerUtil.getBitsSlice(0, 3, 2);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitsSliceDifferenceBetweenStopAndStartIsGreaterThanIntegerSize()
+  {
+    IntegerUtil.getBitsSlice(0, 1, 34);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitNegativeIndex()
+  {
+    IntegerUtil.getBit(0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getBitIndexIsGreaterOrEqualToIntegerSize()
+  {
+    IntegerUtil.getBit(0, Integer.SIZE);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void isBitSetNegativeIndex()
+  {
+    IntegerUtil.isBitSet(0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void isBitSetIndexIsGreaterOrEqualToIntegerSize()
+  {
+    IntegerUtil.isBitSet(0, Integer.SIZE);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void setBitNegativeIndex()
+  {
+    IntegerUtil.setBit(0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void setBitIndexIsGreaterOrEqualToIntegerSize()
+  {
+    IntegerUtil.setBit(0, Integer.SIZE);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitNegativeIndex()
+  {
+    IntegerUtil.clearBit(0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitIndexIsGreaterOrEqualToIntegerSize()
+  {
+    IntegerUtil.clearBit(0, Integer.SIZE);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearHighBytesNumBytesIsNegative()
+  {
+    IntegerUtil.clearHighBytes(0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearHighBytesNumBytesIsGreaterThanIntegerBytes()
+  {
+    IntegerUtil.clearHighBytes(0, Integer.BYTES + 1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getByteNegativeIndex()
+  {
+    IntegerUtil.getByte(0, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void getByteIndexIsGreaterOrEqualToIntegerBytes()
+  {
+    IntegerUtil.getByte(0, Integer.BYTES);
+  }
+
   @Test
   public void setBit() {
     qt().forAll(integers().all())

@@ -60,7 +60,7 @@ public final class IntegerUtil {
     assert startIndex < Integer.SIZE;
     assert stopIndex >= 0;
     assert stopIndex >= startIndex;
-    assert stopIndex - startIndex < Integer.SIZE;
+    assert stopIndex - startIndex <= Integer.SIZE;
 
     return (value & INT_MASKS[stopIndex]) >>> startIndex;
   }

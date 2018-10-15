@@ -40,7 +40,7 @@ public final class ShortUtil {
     assert startIndex < Short.SIZE;
     assert stopIndex >= 0;
     assert stopIndex >= startIndex;
-    assert stopIndex - startIndex < Short.SIZE;
+    assert stopIndex - startIndex <= Short.SIZE;
 
     // it's very important to evaluate expression in the braces firstly
     // otherwise result value will be incorrectly evaluated.

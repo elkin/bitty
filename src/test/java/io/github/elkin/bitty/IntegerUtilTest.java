@@ -40,6 +40,66 @@ public class IntegerUtilTest {
   }
 
   @Test(expectedExceptions = AssertionError.class)
+  public void setBitsSliceNegativeStart()
+  {
+    IntegerUtil.setBitsSlice(0, -1, 1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void setBitsSliceStartIndexIsGreaterOrEqualToIntegerSize()
+  {
+    IntegerUtil.setBitsSlice(0, 32, 33);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void setBitsSliceNegativeStopIndex()
+  {
+    IntegerUtil.setBitsSlice(0, 1, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void setBitsSliceStopIndexIsLessThanStartIndex()
+  {
+    IntegerUtil.setBitsSlice(0, 3, 2);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void setBitsSliceDifferenceBetweenStopAndStartIsGreaterThanIntegerSize()
+  {
+    IntegerUtil.setBitsSlice(0, 1, 34);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitsSliceNegativeStart()
+  {
+    IntegerUtil.clearBitsSlice(0, -1, 1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitsSliceStartIndexIsGreaterOrEqualToIntegerSize()
+  {
+    IntegerUtil.clearBitsSlice(0, 32, 33);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitsSliceNegativeStopIndex()
+  {
+    IntegerUtil.clearBitsSlice(0, 1, -1);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitsSliceStopIndexIsLessThanStartIndex()
+  {
+    IntegerUtil.clearBitsSlice(0, 3, 2);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
+  public void clearBitsSliceDifferenceBetweenStopAndStartIsGreaterThanIntegerSize()
+  {
+    IntegerUtil.clearBitsSlice(0, 1, 34);
+  }
+
+  @Test(expectedExceptions = AssertionError.class)
   public void getBitNegativeIndex()
   {
     IntegerUtil.getBit(0, -1);
@@ -203,6 +263,46 @@ public class IntegerUtilTest {
                       start,
                       start + length - 1),
                       (number >>> start) & mask);
+                }
+              }
+            });
+  }
+
+  @Test
+  public void setBitsSlice() {
+    qt().forAll(integers().all())
+        .checkAssert(
+            number -> {
+              for (int length = 1, mask = 1;
+                  length <= Integer.SIZE;
+                  ++length, mask = (mask << 1) | 1) {
+                for (int start = 0; start < Integer.SIZE; ++start) {
+                  assertEquals(
+                      IntegerUtil.setBitsSlice(
+                          number,
+                          start,
+                          start + length - 1),
+                      number | (mask << start));
+                }
+              }
+            });
+  }
+
+  @Test
+  public void clearBitsSlice() {
+    qt().forAll(integers().all())
+        .checkAssert(
+            number -> {
+              for (int length = 1, mask = 1;
+                  length <= Integer.SIZE;
+                  ++length, mask = (mask << 1) | 1) {
+                for (int start = 0; start < Integer.SIZE; ++start) {
+                  assertEquals(
+                      IntegerUtil.clearBitsSlice(
+                          number,
+                          start,
+                          start + length - 1),
+                      number & (~(mask << start)));
                 }
               }
             });

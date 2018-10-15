@@ -52,17 +52,33 @@ public final class IntegerUtil {
       0xEFFFFFFF, 0xDFFFFFFF, 0xBFFFFFFF, 0x7FFFFFFF,
   };
 
-  private IntegerUtil() {
-  }
-
-  public static int getBitsSlice(int value, int startIndex, int stopIndex) {
+  private static void checkSliceAsserts(int startIndex, int stopIndex)
+  {
     assert startIndex >= 0;
     assert startIndex < Integer.SIZE;
     assert stopIndex >= 0;
     assert stopIndex >= startIndex;
     assert stopIndex - startIndex <= Integer.SIZE;
+  }
 
+  private IntegerUtil() {
+  }
+
+  public static int getBitsSlice(int value, int startIndex, int stopIndex) {
+    checkSliceAsserts(startIndex, stopIndex);
     return (value & INT_MASKS[stopIndex]) >>> startIndex;
+  }
+
+  public static int setBitsSlice(int value, int startIndex, int stopIndex) {
+    checkSliceAsserts(startIndex, stopIndex);
+
+    return value | (INT_MASKS[stopIndex - startIndex] << startIndex);
+  }
+
+  public static int clearBitsSlice(int value, int startIndex, int stopIndex) {
+    checkSliceAsserts(startIndex, stopIndex);
+
+    return value & (~(INT_MASKS[stopIndex - startIndex] << startIndex));
   }
 
   public static int getBit(int value, int index) {

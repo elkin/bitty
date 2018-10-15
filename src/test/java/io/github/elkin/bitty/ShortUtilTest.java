@@ -36,8 +36,8 @@ public class ShortUtilTest {
     qt().forAll(integers().between(Short.MIN_VALUE, Short.MAX_VALUE))
         .checkAssert(
             number -> {
-              for (int numBytes = 0; numBytes < Short.BYTES; ++numBytes) {
-                int result = ShortUtil.clearHighBytes(number.shortValue(), numBytes);
+              for (int numBytes = 0; numBytes <= Short.BYTES; ++numBytes) {
+                short result = ShortUtil.clearHighBytes(number.shortValue(), numBytes);
                 switch (numBytes) {
                   case 0:
                     assertEquals(result, 0);
@@ -47,15 +47,7 @@ public class ShortUtilTest {
                     break;
 
                   case 2:
-                    assertEquals(result, number & 0xFFFF);
-                    break;
-
-                  case 3:
-                    assertEquals(result, number & 0xFFFFFF);
-                    break;
-
-                  case 4:
-                    assertEquals(result, (int) number);
+                    assertEquals(result, number.shortValue());
                     break;
 
                   default:

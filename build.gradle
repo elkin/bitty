@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id 'org.jetbrains.kotlin.jvm' version '1.2.71'
 }
 
 jacoco {
@@ -19,6 +20,7 @@ repositories {
 dependencies {
     testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
     testCompile group: 'org.quicktheories', name: 'quicktheories', version: '0.25'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 test {
@@ -34,3 +36,13 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}

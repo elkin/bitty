@@ -198,7 +198,7 @@ public class IntegerUtilTest {
     qt().forAll(integers().all())
         .checkAssert(
             number -> {
-              for (int numBytes = 0; numBytes < Integer.BYTES; ++numBytes) {
+              for (int numBytes = 0; numBytes <= Integer.BYTES; ++numBytes) {
                 int result = IntegerUtil.clearHighBytes(number, numBytes);
                 switch (numBytes) {
                   case 0:
@@ -219,6 +219,7 @@ public class IntegerUtilTest {
                   case 4:
                     assertEquals(result, (int) number);
                     break;
+
                   default:
                     fail();
                     break;

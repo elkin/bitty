@@ -94,7 +94,7 @@ public final class LongUtil {
     assert startIndex < Long.SIZE;
     assert stopIndex >= 0;
     assert stopIndex >= startIndex;
-    assert stopIndex - startIndex < Long.SIZE;
+    assert stopIndex - startIndex <= Long.SIZE;
 
     return (value & LONG_MASKS[stopIndex]) >>> startIndex;
   }

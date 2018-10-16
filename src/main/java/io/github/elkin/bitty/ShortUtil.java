@@ -91,21 +91,15 @@ public final class ShortUtil {
   }
 
   public static int numberOfBytes(short value) {
-    int highestBit = Integer.highestOneBit(value & 0xFFFF);
-    switch (highestBit) {
-      case 0x8000:
-      case 0x4000:
-      case 0x2000:
-      case 0x1000:
-      case 0x800:
-      case 0x400:
-      case 0x200:
-      case 0x100:
-        return 2;
-
-      default:
-        return 1;
+    if (value < 0) {
+      return 2;
     }
+
+    if (value <= 0xFF) {
+      return 1;
+    }
+
+    return 2;
   }
 
   public static short clearHighBytes(short value, int numBytes) {

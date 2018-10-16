@@ -1,13 +1,22 @@
 = bitty
 
 image:https://travis-ci.org/elkin/bitty.svg?branch=master["Build Status", link="https://travis-ci.org/elkin/bitty"]
-image:https://codecov.io/gh/elkin/bitty/branch/master/graph/badge.svg["Coverage", link="https://codecov.io/gh/elkin/bitty/tree/master"]
+image:https://codecov.io/gh/elkin/bitty/branch/master/graph/badge.svg["Coverage", link="https://codecov.io/gh/elkin/bitty"]
 
 bit manipulation library
 
+== Supported types
+
+At the moment the library provides bit manipulation operations for the following types only: `int`, `long`, `short`.
+
 == How it is organized
 
-The library provides three utility classes for bit manipulation:
+The library provides four utility classes for bit manipulation:
+
+* link:src/main/java/io/github/elkin/bitty/BitUtil.java[BitUtil]
++
+Class provides overloaded bit manipulation operations for all <<supported-types, supported types>>.
+Probably that's the only class you need. It comprises of all available bit manipulation operations
 
 * link:src/main/java/io/github/elkin/bitty/IntegerUtil.java[IntegerUtil]
 * link:src/main/java/io/github/elkin/bitty/LongUtil.java[LongUtil]
@@ -18,12 +27,15 @@ Each utility class provides bit manipulation operations for a corresponding type
 For each type(`int`, `long`, `short`) following bit manipulation operations are implemented:
 
 * get bits slice
+* set bits slice
+* clear bits slice
 * get bit by index
 * check if bit is set
 * set bit by index
 * clear bit by index
 * get byte
 * get number of non-zero bytes
+* clear higher order bytes
 
 IMPORTANT: Lowest bit and byte index is zero.
 
@@ -31,18 +43,19 @@ IMPORTANT: Lowest bit and byte index is zero.
 
 [source,java]
 ----
-int value = IntegerUtil.getBitsSlice(0xFEFE, 0, 7);
+int value = BitUtil.getBitsSlice(0xFEFE, 0, 7);
 // value is equal to 0xFE
 
-long bit = LongUtil.setBit(0x80L, 3);
+long bit = BitUtil.setBit(0x80L, 3);
 // bit is equal to 0x88L
 
-byte b = ShortUtil.getByte((short)0x8880, 1);
+byte b = BitUtil.getByte((short)0x8880, 1);
 // b is equal to 0x88
 ----
 
 == Tests
 
-All bit manipulation operations are tested. See coverage on the badge. You can find tests in the directory link:src/test/java/io/github/elkin/bitty[src/test/java/io/github/elkin/bitty].
+All bit manipulation operations are tested. See coverage on the badge.
+You can find tests in the directory link:src/test/java/io/github/elkin/bitty[src/test/java/io/github/elkin/bitty].
 
 Tests use nice library for property based testing: link:https://github.com/ncredinburgh/QuickTheories[QuickTheories].

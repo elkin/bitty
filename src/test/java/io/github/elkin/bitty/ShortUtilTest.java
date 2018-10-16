@@ -277,7 +277,7 @@ public class ShortUtilTest {
                           number.shortValue(),
                           start,
                           start + length - 1),
-                      number | (mask << start));
+                      (short)(number | (mask << start)));
                 }
               }
             });
@@ -297,7 +297,7 @@ public class ShortUtilTest {
                           number.shortValue(),
                           start,
                           start + length - 1),
-                      number & (~(mask << start)));
+                      (short)(number & (~(mask << start))));
                 }
               }
             });

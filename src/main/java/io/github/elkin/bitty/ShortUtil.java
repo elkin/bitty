@@ -52,16 +52,16 @@ public final class ShortUtil {
     return (short) ((value & SHORT_MASKS[stopIndex]) >>> startIndex);
   }
 
-  public static int setBitsSlice(short value, int startIndex, int stopIndex) {
+  public static short setBitsSlice(short value, int startIndex, int stopIndex) {
     checkSliceAsserts(startIndex, stopIndex);
 
-    return value | (SHORT_MASKS[stopIndex - startIndex] << startIndex);
+    return (short) (value | (SHORT_MASKS[stopIndex - startIndex] << startIndex));
   }
 
-  public static int clearBitsSlice(int value, int startIndex, int stopIndex) {
+  public static short clearBitsSlice(int value, int startIndex, int stopIndex) {
     checkSliceAsserts(startIndex, stopIndex);
 
-    return value & (~(SHORT_MASKS[stopIndex - startIndex] << startIndex));
+    return (short) (value & (~(SHORT_MASKS[stopIndex - startIndex] << startIndex)));
   }
 
   public static short getBit(short value, int index) {

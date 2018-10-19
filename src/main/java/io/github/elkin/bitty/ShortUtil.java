@@ -58,7 +58,7 @@ public final class ShortUtil {
     return (short) (value | (SHORT_MASKS[stopIndex - startIndex] << startIndex));
   }
 
-  public static short clearBitsSlice(int value, int startIndex, int stopIndex) {
+  public static short clearBitsSlice(short value, int startIndex, int stopIndex) {
     checkSliceAsserts(startIndex, stopIndex);
 
     return (short) (value & (~(SHORT_MASKS[stopIndex - startIndex] << startIndex)));

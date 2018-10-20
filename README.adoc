@@ -3,11 +3,13 @@
 image:https://travis-ci.org/elkin/bitty.svg?branch=master["Build Status", link="https://travis-ci.org/elkin/bitty"]
 image:https://codecov.io/gh/elkin/bitty/branch/master/graph/badge.svg["Coverage", link="https://codecov.io/gh/elkin/bitty"]
 
-bit manipulation library
+bit manipulation library for Java and Kotlin
 
 == Supported types
 
-At the moment the library provides bit manipulation operations for the following types only: `int`, `long`, `short`.
+At the moment the library provides bit manipulation operations in Java for the following types only: `int`, `long`,
+`short`.
+Also it provides extension functions for Kotlin types: `Int`, `Long`, `Short`.
 
 == How it is organized
 
@@ -16,7 +18,7 @@ The library provides four utility classes for bit manipulation:
 * link:src/main/java/io/github/elkin/bitty/BitUtil.java[BitUtil]
 +
 Class provides overloaded bit manipulation operations for all <<supported-types, supported types>>.
-Probably that's the only class you need. It comprises of all available bit manipulation operations
+Probably that's the only class you need. It comprises all available bit manipulation operations.
 
 * link:src/main/java/io/github/elkin/bitty/IntegerUtil.java[IntegerUtil]
 * link:src/main/java/io/github/elkin/bitty/LongUtil.java[LongUtil]
@@ -37,20 +39,35 @@ For each type(`int`, `long`, `short`) following bit manipulation operations are 
 * get number of non-zero bytes
 * clear higher order bytes
 
-IMPORTANT: Lowest bit and byte index is zero.
+IMPORTANT: **Lowest bit and byte indexes are zero**.
 
 == Examples
 
+* **Java**
++
 [source,java]
 ----
-int value = BitUtil.getBitsSlice(0xFEFE, 0, 7);
+// gets the first byte
+int intValue = BitUtil.getBitsSlice(0xFEFE, 0, 7);
 // value is equal to 0xFE
 
-long bit = BitUtil.setBit(0x80L, 3);
-// bit is equal to 0x88L
+long longValue = BitUtil.setBit(0x80L, 3);
+// longValue is equal to 0x88L
 
-byte b = BitUtil.getByte((short)0x8880, 1);
-// b is equal to 0x88
+byte byteValue = BitUtil.getByte((short)0x8880, 1);
+// byteValue is equal to 0x88
+----
+
+* **Kotlin**
++
+[source,kotlin]
+----
+235.getBitsSlice(2,4);
+
+1024L.getBit(11)
+
+val shortValue = 128.toShort();
+shortValue.isBitSet(7);
 ----
 
 == Tests

@@ -3,7 +3,7 @@ package io.github.elkin.bitty
 import org.testng.Assert.assertEquals
 import org.testng.annotations.Test
 
-class UtilKtTest {
+class BitOperationsKtTest {
 
     @Test
     fun testGetBitsSlice() {

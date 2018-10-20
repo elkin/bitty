@@ -235,11 +235,11 @@ public final class LongUtil {
     return (byte) ((value & BYTE_MASKS[index]) >>> (index << 3));
   }
 
-  public static long clearHighBytes(long value, int numBytes) {
-    assert numBytes >= 0;
-    assert numBytes <= Long.BYTES;
+  public static long clearHighBytes(long value, int numBytesToLeave) {
+    assert numBytesToLeave >= 0;
+    assert numBytesToLeave <= Long.BYTES;
 
-    return (value & BYTE_SLICE_MASKS[numBytes]);
+    return (value & BYTE_SLICE_MASKS[numBytesToLeave]);
   }
 }
 

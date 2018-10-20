@@ -102,11 +102,11 @@ public final class ShortUtil {
     return 2;
   }
 
-  public static short clearHighBytes(short value, int numBytes) {
-    assert numBytes >= 0;
-    assert numBytes <= Short.BYTES;
+  public static short clearHighBytes(short value, int numBytesToLeave) {
+    assert numBytesToLeave >= 0;
+    assert numBytesToLeave <= Short.BYTES;
 
-    return (short) (value & BYTE_SLICE_MASKS[numBytes]);
+    return (short) (value & BYTE_SLICE_MASKS[numBytesToLeave]);
   }
 
   public static byte getByte(short value, int index) {

@@ -16,7 +16,7 @@ fun Int.isBitSet(index: Int) = IntegerUtil.isBitSet(this, index)
 
 fun Int.numberOfBytes() = IntegerUtil.numberOfBytes(this)
 
-fun Int.clearHighBytes(numBytes: Int) = IntegerUtil.clearHighBytes(this, numBytes)
+fun Int.clearHighBytes(numBytesToLeave: Int) = IntegerUtil.clearHighBytes(this, numBytesToLeave)
 
 fun Int.getByte(index: Int) = IntegerUtil.getByte(this, index)
 
@@ -36,7 +36,7 @@ fun Long.isBitSet(index: Int) = LongUtil.isBitSet(this, index)
 
 fun Long.numberOfBytes() = LongUtil.numberOfBytes(this)
 
-fun Long.clearHighBytes(numBytes: Int) = LongUtil.clearHighBytes(this, numBytes)
+fun Long.clearHighBytes(numBytesToLeave: Int) = LongUtil.clearHighBytes(this, numBytesToLeave)
 
 fun Long.getByte(index: Int) = LongUtil.getByte(this, index)
 
@@ -56,6 +56,6 @@ fun Short.isBitSet(index: Int) = ShortUtil.isBitSet(this, index)
 
 fun Short.numberOfBytes() = ShortUtil.numberOfBytes(this)
 
-fun Short.clearHighBytes(numBytes: Int) = ShortUtil.clearHighBytes(this, numBytes)
+fun Short.clearHighBytes(numBytesToLeave: Int) = ShortUtil.clearHighBytes(this, numBytesToLeave)
 
 fun Short.getByte(index: Int) = ShortUtil.getByte(this, index)

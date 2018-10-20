@@ -87,16 +87,16 @@ public final class BitUtil {
     return ShortUtil.clearBit(value, index);
   }
 
-  public static int clearHighBytes(int value, int numBytes) {
-    return IntegerUtil.clearHighBytes(value, numBytes);
+  public static int clearHighBytes(int value, int numBytesToLeave) {
+    return IntegerUtil.clearHighBytes(value, numBytesToLeave);
   }
 
-  public static long clearHighBytes(long value, int numBytes) {
-    return LongUtil.clearHighBytes(value, numBytes);
+  public static long clearHighBytes(long value, int numBytesToLeave) {
+    return LongUtil.clearHighBytes(value, numBytesToLeave);
   }
 
-  public static short clearHighBytes(short value, int numBytes) {
-    return ShortUtil.clearHighBytes(value, numBytes);
+  public static short clearHighBytes(short value, int numBytesToLeave) {
+    return ShortUtil.clearHighBytes(value, numBytesToLeave);
   }
 
   public static int numberOfBytes(int value) {

@@ -154,11 +154,11 @@ public final class IntegerUtil {
     }
   }
 
-  public static int clearHighBytes(int value, int numBytes) {
-    assert numBytes >= 0;
-    assert numBytes <= Integer.BYTES;
+  public static int clearHighBytes(int value, int numBytesToLeave) {
+    assert numBytesToLeave >= 0;
+    assert numBytesToLeave <= Integer.BYTES;
 
-    return (value & BYTE_SLICE_MASKS[numBytes]);
+    return (value & BYTE_SLICE_MASKS[numBytesToLeave]);
   }
 
   public static byte getByte(int value, int index) {

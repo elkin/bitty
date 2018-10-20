@@ -206,7 +206,7 @@ class BitOperationsKtTest {
                 for (i in 0 until java.lang.Short.SIZE) {
                     val numShort = number.toShort()
                     assertEquals(
-                        BitUtil.isBitSet(numShort, i),
+                        numShort.isBitSet(i),
                         ShortUtil.isBitSet(numShort, i)
                     )
                 }
@@ -274,7 +274,7 @@ class BitOperationsKtTest {
                 for (i in 0 until java.lang.Short.SIZE) {
                     val numShort = number.toShort()
                     assertEquals(
-                        BitUtil.clearBit(numShort, i),
+                        numShort.clearBit(i),
                         ShortUtil.clearBit(numShort, i)
                     )
                 }

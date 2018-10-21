@@ -16,8 +16,6 @@ public final class ShortUtil {
 
   private static final int[] BYTE_SLICE_MASKS = {0, 0xFF, 0xFFFF};
 
-  private static final int[] BYTE_MASKS = {0xFF, 0xFF00};
-
   private static final int[] SHORT_BIT_MASKS = {
       0x1, 0x2, 0x4, 0x8,
       0x10, 0x20, 0x40, 0x80,

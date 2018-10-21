@@ -86,46 +86,97 @@ public final class LongUtil {
       0xFF00000000L, 0xFF0000000000L, 0xFF000000000000L, 0xFF00000000000000L
   };
 
-  private static void checkSliceAsserts(int startIndex, int stopIndex)
+  private static void checkSliceIndexes(int startIndex, int stopIndex)
   {
-    assert startIndex >= 0;
-    assert startIndex < Long.SIZE;
-    assert stopIndex >= 0;
-    assert stopIndex >= startIndex;
-    assert stopIndex - startIndex <= Long.SIZE;
+    if (startIndex < 0 || startIndex >= Long.SIZE) {
+      throw new IllegalArgumentException(
+          "startIndex parameter must be in the range [0, 63], but it's equal to " + startIndex);
+    }
+
+    if ((stopIndex < 0) || (stopIndex < startIndex) || (stopIndex - startIndex) > Long.SIZE) {
+      throw new IllegalArgumentException(
+          String.format(
+              "stopIndex parameter must be in the range [%d, %d], but it's equal to %d",
+              startIndex,
+              startIndex + Long.SIZE,
+              stopIndex));
+    }
+  }
+
+  private static void checkBitIndex(int index) {
+    if (index < 0 || index >= Long.SIZE) {
+      throw new IllegalArgumentException(
+          String.format(
+              "index parameter must be in the range[0, %d], but it's equal to %d",
+              Long.SIZE - 1,
+              index));
+    }
   }
 
   private LongUtil() {
   }
 
   public static long getBitsSlice(long value, int startIndex, int stopIndex) {
-    checkSliceAsserts(startIndex, stopIndex);
-
     return (value & LONG_MASKS[stopIndex]) >>> startIndex;
   }
 
-  public static long setBitsSlice(long value, int startIndex, int stopIndex) {
-    checkSliceAsserts(startIndex, stopIndex);
+  public static long getBitsSliceSafe(long value, int startIndex, int stopIndex) {
+    checkSliceIndexes(startIndex, stopIndex);
+    return getBitsSlice(value, startIndex, stopIndex);
+  }
 
+  public static long setBitsSlice(long value, int startIndex, int stopIndex) {
     return value | (LONG_MASKS[stopIndex - startIndex] << startIndex);
   }
 
-  public static long clearBitsSlice(long value, int startIndex, int stopIndex) {
-    checkSliceAsserts(startIndex, stopIndex);
+  public static long setBitsSliceSafe(long value, int startIndex, int stopIndex) {
+    checkSliceIndexes(startIndex, stopIndex);
+    return setBitsSlice(value, startIndex, stopIndex);
+  }
 
+  public static long clearBitsSlice(long value, int startIndex, int stopIndex) {
     return value & (~(LONG_MASKS[stopIndex - startIndex] << startIndex));
   }
 
+  public static long clearBitsSliceSafe(long value, int startIndex, int stopIndex) {
+    checkSliceIndexes(startIndex, stopIndex);
+    return clearBitsSlice(value, startIndex, stopIndex);
+  }
+
   public static long getBit(long value, int index) {
-    assert index >= 0;
-    assert index < Long.SIZE;
     return (value & LONG_BIT_MASKS[index]) >>> index;
   }
 
+  public static long getBitSafe(long value, int index) {
+    checkBitIndex(index);
+    return getBit(value, index);
+  }
+
   public static boolean isBitSet(long value, int index) {
-    assert index >= 0;
-    assert index < Long.SIZE;
     return (value & LONG_BIT_MASKS[index]) != 0;
+  }
+
+  public static boolean isBitSetSafe(long value, int index) {
+    checkBitIndex(index);
+    return isBitSet(value, index);
+  }
+
+  public static long setBit(long value, int index) {
+    return value | LONG_BIT_MASKS[index];
+  }
+
+  public static long setBitSafe(long value, int index) {
+    checkBitIndex(index);
+    return setBit(value, index);
+  }
+
+  public static long clearBit(long value, int index) {
+    return value & INVERTED_LONG_BIT_MASKS[index];
+  }
+
+  public static long clearBitSafe(long value, int index) {
+    checkBitIndex(index);
+    return clearBit(value, index);
   }
 
   public static int numberOfBytes(long value) {
@@ -215,31 +266,31 @@ public final class LongUtil {
     }
   }
 
-  public static long setBit(long value, int index) {
-    assert index >= 0;
-    assert index < Long.SIZE;
-    return value | LONG_BIT_MASKS[index];
-  }
-
-  public static long clearBit(long value, int index) {
-    assert index >= 0;
-    assert index < Long.SIZE;
-
-    return value & INVERTED_LONG_BIT_MASKS[index];
-  }
-
   public static byte getByte(long value, int index) {
-    assert index >= 0;
-    assert index < Long.BYTES;
-
     return (byte) ((value & BYTE_MASKS[index]) >>> (index << 3));
   }
 
-  public static long clearHighBytes(long value, int numBytesToLeave) {
-    assert numBytesToLeave >= 0;
-    assert numBytesToLeave <= Long.BYTES;
+  public static byte getByteSafe(long value, int index) {
+    if (index < 0 || index >= Long.BYTES) {
+      throw new IllegalArgumentException(
+          "Index parameter must be in the range [0, 7], but it's equal to " + index);
+    }
 
+    return getByte(value, index);
+  }
+
+  public static long clearHighBytes(long value, int numBytesToLeave) {
     return (value & BYTE_SLICE_MASKS[numBytesToLeave]);
+  }
+
+  public static long clearHighBytesSafe(long value, int numBytesToLeave) {
+    if (numBytesToLeave < 0 || numBytesToLeave > Long.BYTES) {
+      throw new IllegalArgumentException(
+          "numberOfBytesToLeave parameter must be in the range [0, 8], but it's equal to "
+              + numBytesToLeave);
+    }
+
+    return clearHighBytes(value, numBytesToLeave);
   }
 }
 

@@ -95,7 +95,7 @@ public final class IntegerUtil {
   public static int setBitsSliceSafe(int value, int startIndex, int stopIndex) {
     checkSliceIndexes(startIndex, stopIndex);
 
-    return value | (INT_MASKS[stopIndex - startIndex] << startIndex);
+    return setBitsSlice(value, startIndex, stopIndex);
   }
 
   public static int clearBitsSlice(int value, int startIndex, int stopIndex) {
@@ -105,7 +105,7 @@ public final class IntegerUtil {
   public static int clearBitsSliceSafe(int value, int startIndex, int stopIndex) {
     checkSliceIndexes(startIndex, stopIndex);
 
-    return value & (~(INT_MASKS[stopIndex - startIndex] << startIndex));
+    return clearBitsSlice(value, startIndex, stopIndex);
   }
 
   public static int getBit(int value, int index) {
@@ -114,7 +114,7 @@ public final class IntegerUtil {
 
   public static int getBitSafe(int value, int index) {
     checkBitIndex(index);
-    return (value & INT_BIT_MASKS[index]) >>> index;
+    return getBit(value, index);
   }
 
   public static boolean isBitSet(int value, int index) {
@@ -123,7 +123,7 @@ public final class IntegerUtil {
 
   public static boolean isBitSetSafe(int value, int index) {
     checkBitIndex(index);
-    return (value & INT_BIT_MASKS[index]) != 0;
+    return isBitSet(value, index);
   }
 
   public static int setBit(int value, int index) {
@@ -132,7 +132,7 @@ public final class IntegerUtil {
 
   public static int setBitSafe(int value, int index) {
     checkBitIndex(index);
-    return value | INT_BIT_MASKS[index];
+    return setBit(value, index);
   }
 
   public static int clearBit(int value, int index) {
@@ -141,7 +141,7 @@ public final class IntegerUtil {
 
   public static int clearBitSafe(int value, int index) {
     checkBitIndex(index);
-    return value & INVERTED_INT_BIT_MASKS[index];
+    return clearBit(value, index);
   }
 
   public static int numberOfBytes(int value) {

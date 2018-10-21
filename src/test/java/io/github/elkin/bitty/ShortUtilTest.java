@@ -9,166 +9,166 @@ import org.testng.annotations.Test;
 
 public class ShortUtilTest {
   
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceNegativeStart()
   {
-    ShortUtil.getBitsSlice((short)0, -1, 1);
+    ShortUtil.getBitsSliceSafe((short)0, -1, 1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceStartIndexIsGreaterOrEqualToShortSize()
   {
-    ShortUtil.getBitsSlice((short) 0, Short.SIZE, Short.SIZE + 1);
+    ShortUtil.getBitsSliceSafe((short) 0, Short.SIZE, Short.SIZE + 1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceNegativeStopIndex()
   {
-    ShortUtil.getBitsSlice((short) 0, 1, -1);
+    ShortUtil.getBitsSliceSafe((short) 0, 1, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceStopIndexIsLessThanStartIndex()
   {
-    ShortUtil.getBitsSlice((short) 0, 3, 2);
+    ShortUtil.getBitsSliceSafe((short) 0, 3, 2);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceDifferenceBetweenStopAndStartIsGreaterThanShortSize()
   {
-    ShortUtil.getBitsSlice((short) 0, 1, Short.SIZE + 2);
+    ShortUtil.getBitsSliceSafe((short) 0, 1, Short.SIZE + 2);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceNegativeStart()
   {
-    ShortUtil.setBitsSlice((short)0, -1, 1);
+    ShortUtil.setBitsSliceSafe((short)0, -1, 1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceStartIndexIsGreaterOrEqualToShortSize()
   {
-    ShortUtil.setBitsSlice((short) 0, Short.SIZE, Short.SIZE + 1);
+    ShortUtil.setBitsSliceSafe((short) 0, Short.SIZE, Short.SIZE + 1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceNegativeStopIndex()
   {
-    ShortUtil.setBitsSlice((short) 0, 1, -1);
+    ShortUtil.setBitsSliceSafe((short) 0, 1, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceStopIndexIsLessThanStartIndex()
   {
-    ShortUtil.setBitsSlice((short) 0, 3, 2);
+    ShortUtil.setBitsSliceSafe((short) 0, 3, 2);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceDifferenceBetweenStopAndStartIsGreaterThanShortSize()
   {
-    ShortUtil.setBitsSlice((short) 0, 1, Short.SIZE + 2);
+    ShortUtil.setBitsSliceSafe((short) 0, 1, Short.SIZE + 2);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceNegativeStart()
   {
-    ShortUtil.clearBitsSlice((short)0, -1, 1);
+    ShortUtil.clearBitsSliceSafe((short)0, -1, 1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceStartIndexIsGreaterOrEqualToShortSize()
   {
-    ShortUtil.clearBitsSlice((short) 0, Short.SIZE, Short.SIZE + 1);
+    ShortUtil.clearBitsSliceSafe((short) 0, Short.SIZE, Short.SIZE + 1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceNegativeStopIndex()
   {
-    ShortUtil.clearBitsSlice((short) 0, 1, -1);
+    ShortUtil.clearBitsSliceSafe((short) 0, 1, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceStopIndexIsLessThanStartIndex()
   {
-    ShortUtil.getBitsSlice((short) 0, 3, 2);
+    ShortUtil.getBitsSliceSafe((short) 0, 3, 2);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceDifferenceBetweenStopAndStartIsGreaterThanShortSize()
   {
-    ShortUtil.clearBitsSlice((short) 0, 1, Short.SIZE + 2);
+    ShortUtil.clearBitsSliceSafe((short) 0, 1, Short.SIZE + 2);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitNegativeIndex()
   {
-    ShortUtil.getBit((short) 0, -1);
+    ShortUtil.getBitSafe((short) 0, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitIndexIsGreaterOrEqualToIntegerSize()
   {
-    ShortUtil.getBit((short) 0, Short.SIZE);
+    ShortUtil.getBitSafe((short) 0, Short.SIZE);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void isBitSetNegativeIndex()
   {
-    ShortUtil.isBitSet((short) 0, -1);
+    ShortUtil.isBitSetSafe((short) 0, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void isBitSetIndexIsGreaterOrEqualToIntegerSize()
   {
-    ShortUtil.isBitSet((short) 0, Short.SIZE);
+    ShortUtil.isBitSetSafe((short) 0, Short.SIZE);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitNegativeIndex()
   {
-    ShortUtil.setBit((short) 0, -1);
+    ShortUtil.setBitSafe((short) 0, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitIndexIsGreaterOrEqualToIntegerSize()
   {
-    ShortUtil.setBit((short) 0, Short.SIZE);
+    ShortUtil.setBitSafe((short) 0, Short.SIZE);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitNegativeIndex()
   {
-    ShortUtil.clearBit((short) 0, -1);
+    ShortUtil.clearBitSafe((short) 0, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitIndexIsGreaterOrEqualToIntegerSize()
   {
-    ShortUtil.clearBit((short) 0, Short.SIZE);
+    ShortUtil.clearBitSafe((short) 0, Short.SIZE);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearHighBytesNumBytesIsNegative()
   {
-    ShortUtil.clearHighBytes((short) 0, -1);
+    ShortUtil.clearHighBytesSafe((short) 0, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearHighBytesNumBytesIsGreaterThanIntegerBytes()
   {
-    ShortUtil.clearHighBytes((short) 0, Short.BYTES + 1);
+    ShortUtil.clearHighBytesSafe((short) 0, Short.BYTES + 1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getByteNegativeIndex()
   {
-    ShortUtil.getByte((short) 0, -1);
+    ShortUtil.getByteSafe((short) 0, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getByteIndexIsGreaterOrEqualToIntegerBytes()
   {
-    ShortUtil.getByte((short) 0, Short.BYTES);
+    ShortUtil.getByteSafe((short) 0, Short.BYTES);
   }
 
   @Test
@@ -178,6 +178,7 @@ public class ShortUtilTest {
             number -> {
               for (short bit = 1, i = 0; bit != 0; bit = (short)(bit << 1), ++i) {
                 assertEquals(ShortUtil.setBit(number.shortValue(), i), number | bit);
+                assertEquals(ShortUtil.setBitSafe(number.shortValue(), i), number | bit);
               }
             });
   }
@@ -189,6 +190,7 @@ public class ShortUtilTest {
             number -> {
               for (short bit = 1, i = 0; bit != 0; bit = (short)(bit << 1), ++i) {
                 assertEquals(ShortUtil.clearBit(number.shortValue(), i), number & (~bit));
+                assertEquals(ShortUtil.clearBitSafe(number.shortValue(), i), number & (~bit));
               }
             });
   }
@@ -200,16 +202,20 @@ public class ShortUtilTest {
             number -> {
               for (int numBytes = 0; numBytes <= Short.BYTES; ++numBytes) {
                 short result = ShortUtil.clearHighBytes(number.shortValue(), numBytes);
+                short safeResult = ShortUtil.clearHighBytesSafe(number.shortValue(), numBytes);
                 switch (numBytes) {
                   case 0:
                     assertEquals(result, 0);
+                    assertEquals(safeResult, 0);
                     break;
                   case 1:
                     assertEquals(result, number & 0xFF);
+                    assertEquals(safeResult, number & 0xFF);
                     break;
 
                   case 2:
                     assertEquals(result, number.shortValue());
+                    assertEquals(safeResult, number.shortValue());
                     break;
 
                   default:
@@ -227,7 +233,12 @@ public class ShortUtilTest {
         .checkAssert(
             number -> {
               for (short bit = 1, i = 0; bit != 0; bit = (short)(bit << 1), ++i) {
-                assertEquals(ShortUtil.isBitSet(number.shortValue(), i),
+                assertEquals(
+                    ShortUtil.isBitSet(number.shortValue(), i),
+                    (number & bit) != 0);
+
+                assertEquals(
+                    ShortUtil.isBitSetSafe(number.shortValue(), i),
                     (number & bit) != 0);
               }
             });
@@ -239,7 +250,12 @@ public class ShortUtilTest {
         .checkAssert(
             number -> {
               for (int bit = 1, i = 0; i < Short.SIZE; bit <<= 1, ++i) {
-                assertEquals(ShortUtil.getBit(number.shortValue(), i),
+                assertEquals(
+                    ShortUtil.getBit(number.shortValue(), i),
+                    (short) ((number & bit) >>> i));
+
+                assertEquals(
+                    ShortUtil.getBitSafe(number.shortValue(), i),
                     (short) ((number & bit) >>> i));
               }
             });
@@ -254,9 +270,18 @@ public class ShortUtilTest {
                   length <= Short.SIZE;
                   ++length, mask = (mask << 1) | 1) {
                 for (int start = 0; start < Short.SIZE; ++start) {
-                  assertEquals(ShortUtil.getBitsSlice(number.shortValue(),
-                      start,
-                      start + length - 1),
+                  assertEquals(
+                      ShortUtil.getBitsSlice(
+                          number.shortValue(),
+                          start,
+                          start + length - 1),
+                      (short) (((number & 0xFFFF) >>> start) & mask));
+
+                  assertEquals(
+                      ShortUtil.getBitsSliceSafe(
+                          number.shortValue(),
+                          start,
+                          start + length - 1),
                       (short) (((number & 0xFFFF) >>> start) & mask));
                 }
               }
@@ -274,6 +299,13 @@ public class ShortUtilTest {
                 for (int start = 0; start < Short.SIZE; ++start) {
                   assertEquals(
                       ShortUtil.setBitsSlice(
+                          number.shortValue(),
+                          start,
+                          start + length - 1),
+                      (short)(number | (mask << start)));
+
+                  assertEquals(
+                      ShortUtil.setBitsSliceSafe(
                           number.shortValue(),
                           start,
                           start + length - 1),
@@ -298,6 +330,13 @@ public class ShortUtilTest {
                           start,
                           start + length - 1),
                       (short)(number & (~(mask << start))));
+
+                  assertEquals(
+                      ShortUtil.clearBitsSliceSafe(
+                          number.shortValue(),
+                          start,
+                          start + length - 1),
+                      (short)(number & (~(mask << start))));
                 }
               }
             });
@@ -310,13 +349,16 @@ public class ShortUtilTest {
             number -> {
               for (int byteIndex = 0; byteIndex < Short.BYTES; ++byteIndex) {
                 byte result = ShortUtil.getByte(number.shortValue(), byteIndex);
+                byte safeResult = ShortUtil.getByteSafe(number.shortValue(), byteIndex);
                 switch (byteIndex) {
                   case 0:
                     assertEquals(result, (byte) (number & 0xFF));
+                    assertEquals(safeResult, (byte) (number & 0xFF));
                     break;
 
                   case 1:
                     assertEquals(result, (byte) ((number & 0xFF00) >>> 8));
+                    assertEquals(safeResult, (byte) ((number & 0xFF00) >>> 8));
                     break;
 
                   default:

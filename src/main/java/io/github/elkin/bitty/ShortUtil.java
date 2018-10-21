@@ -32,62 +32,102 @@ public final class ShortUtil {
       0xEFFF, 0xDFFF, 0xBFFF, 0x7FFF,
   };
 
-  private static void checkSliceAsserts(int startIndex, int stopIndex)
+
+  private static void checkSliceIndexes(int startIndex, int stopIndex)
   {
-    assert startIndex >= 0;
-    assert startIndex < Short.SIZE;
-    assert stopIndex >= 0;
-    assert stopIndex >= startIndex;
-    assert stopIndex - startIndex <= Short.SIZE;
+    if (startIndex < 0 || startIndex >= Short.SIZE) {
+      throw new IllegalArgumentException(
+          "startIndex parameter must be in the range [0, 15], but it's equal to " + startIndex);
+    }
+
+    if ((stopIndex < 0) || (stopIndex < startIndex) || (stopIndex - startIndex) > Short.SIZE) {
+      throw new IllegalArgumentException(
+          String.format(
+              "stopIndex parameter must be in the range [%d, %d], but it's equal to %d",
+              startIndex,
+              startIndex + Short.SIZE,
+              stopIndex));
+    }
   }
+
+  private static void checkBitIndex(int index) {
+    if (index < 0 || index >= Short.SIZE) {
+      throw new IllegalArgumentException(
+          String.format(
+              "index parameter must be in the range[0, %d], but it's equal to %d",
+              Short.SIZE - 1,
+              index));
+    }
+  }
+
 
   private ShortUtil() {
   }
 
   public static short getBitsSlice(short value, int startIndex, int stopIndex) {
-    checkSliceAsserts(startIndex, stopIndex);
-
-    // it's very important to evaluate expression in the braces firstly
-    // otherwise result value will be incorrectly evaluated.
     return (short) ((value & SHORT_MASKS[stopIndex]) >>> startIndex);
   }
 
-  public static short setBitsSlice(short value, int startIndex, int stopIndex) {
-    checkSliceAsserts(startIndex, stopIndex);
+  public static short getBitsSliceSafe(short value, int startIndex, int stopIndex) {
+    checkSliceIndexes(startIndex, stopIndex);
 
+    return getBitsSlice(value, startIndex, stopIndex);
+  }
+
+  public static short setBitsSlice(short value, int startIndex, int stopIndex) {
     return (short) (value | (SHORT_MASKS[stopIndex - startIndex] << startIndex));
   }
 
-  public static short clearBitsSlice(short value, int startIndex, int stopIndex) {
-    checkSliceAsserts(startIndex, stopIndex);
+  public static short setBitsSliceSafe(short value, int startIndex, int stopIndex) {
+    checkSliceIndexes(startIndex, stopIndex);
 
+    return setBitsSlice(value, startIndex, stopIndex);
+  }
+
+  public static short clearBitsSlice(short value, int startIndex, int stopIndex) {
     return (short) (value & (~(SHORT_MASKS[stopIndex - startIndex] << startIndex)));
   }
 
+  public static short clearBitsSliceSafe(short value, int startIndex, int stopIndex) {
+    checkSliceIndexes(startIndex, stopIndex);
+
+    return clearBitsSlice(value, startIndex, stopIndex);
+  }
+
   public static short getBit(short value, int index) {
-    assert index >= 0;
-    assert index < Short.SIZE;
     return (short) ((value & SHORT_BIT_MASKS[index]) >>> index);
   }
 
+  public static short getBitSafe(short value, int index) {
+    checkBitIndex(index);
+    return getBit(value, index);
+  }
+
   public static boolean isBitSet(short value, int index) {
-    assert index >= 0;
-    assert index < Short.SIZE;
     return (value & SHORT_BIT_MASKS[index]) != 0;
   }
 
-  public static short setBit(short value, int index) {
-    assert index >= 0;
-    assert index < Short.SIZE;
+  public static boolean isBitSetSafe(short value, int index) {
+    checkBitIndex(index);
+    return isBitSet(value, index);
+  }
 
+  public static short setBit(short value, int index) {
     return (short) (value | SHORT_BIT_MASKS[index]);
   }
 
-  public static short clearBit(short value, int index) {
-    assert index >= 0;
-    assert index < Short.SIZE;
+  public static short setBitSafe(short value, int index) {
+    checkBitIndex(index);
+    return setBit(value, index);
+  }
 
+  public static short clearBit(short value, int index) {
     return (short) (value & INVERTED_SHORT_BIT_MASKS[index]);
+  }
+
+  public static short clearBitSafe(short value, int index) {
+    checkBitIndex(index);
+    return clearBit(value, index);
   }
 
   public static int numberOfBytes(short value) {
@@ -103,16 +143,33 @@ public final class ShortUtil {
   }
 
   public static short clearHighBytes(short value, int numBytesToLeave) {
-    assert numBytesToLeave >= 0;
-    assert numBytesToLeave <= Short.BYTES;
-
     return (short) (value & BYTE_SLICE_MASKS[numBytesToLeave]);
   }
 
-  public static byte getByte(short value, int index) {
-    assert index >= 0;
-    assert index < Short.BYTES;
+  public static short clearHighBytesSafe(short value, int numBytesToLeave) {
+    if (numBytesToLeave < 0 || numBytesToLeave > Short.BYTES) {
+      throw new IllegalArgumentException(
+          "numberOfBytesToLeave parameter must be in the range [0, 8], but it's equal to "
+              + numBytesToLeave);
+    }
 
-    return (byte) ((value & BYTE_MASKS[index]) >>> (index << 3));
+    return clearHighBytes(value, numBytesToLeave);
+  }
+
+  public static byte getByte(short value, int index) {
+    if (index == 0) {
+      return (byte) value;
+    } else {
+        return (byte)(value >>> Byte.SIZE);
+    }
+  }
+
+  public static byte getByteSafe(short value, int index) {
+    if (index < 0 || index >= Short.BYTES) {
+      throw new IllegalArgumentException(
+          "index parameter must be in the range [0, 1], but it's equal to " + index);
+    }
+
+    return getByte(value, index);
   }
 }

@@ -273,7 +273,7 @@ public final class LongUtil {
   public static byte getByteSafe(long value, int index) {
     if (index < 0 || index >= Long.BYTES) {
       throw new IllegalArgumentException(
-          "Index parameter must be in the range [0, 7], but it's equal to " + index);
+          "index parameter must be in the range [0, 7], but it's equal to " + index);
     }
 
     return getByte(value, index);

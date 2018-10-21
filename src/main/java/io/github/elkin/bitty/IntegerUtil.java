@@ -212,7 +212,7 @@ public final class IntegerUtil {
   public static byte getByteSafe(int value, int index) {
     if (index < 0 || index >= Integer.BYTES) {
       throw new IllegalArgumentException(
-          "Index parameter must be in the range [0, 3], but it's equal to " + index);
+          "index parameter must be in the range [0, 3], but it's equal to " + index);
     }
 
     return getByte(value, index);

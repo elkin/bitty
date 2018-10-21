@@ -61,9 +61,11 @@ public final class IntegerUtil {
 
     if ((stopIndex < 0) || (stopIndex < startIndex) || (stopIndex - startIndex) > Integer.SIZE) {
       throw new IllegalArgumentException(
-          "stopIndex parameter must be in the range [startIndex, startIndex + Integer.SIZE], "
-              + "but it's equal to "
-          + stopIndex);
+          String.format(
+              "stopIndex parameter must be in the range [%d, %d], but it's equal to %d",
+              startIndex,
+              startIndex + Integer.SIZE,
+              stopIndex));
     }
   }
 

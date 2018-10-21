@@ -177,6 +177,7 @@ public class IntegerUtilTest {
             number -> {
               for (int bit = 1, i = 0; bit != 0; bit <<= 1, ++i) {
                 assertEquals(IntegerUtil.setBit(number, i), number | bit);
+                assertEquals(IntegerUtil.setBitSafe(number, i), number | bit);
               }
             });
   }
@@ -188,6 +189,7 @@ public class IntegerUtilTest {
             number -> {
               for (int bit = 1, i = 0; bit != 0; bit <<= 1, ++i) {
                 assertEquals(IntegerUtil.clearBit(number, i), number & (~bit));
+                assertEquals(IntegerUtil.clearBitSafe(number, i), number & (~bit));
               }
             });
   }
@@ -199,24 +201,30 @@ public class IntegerUtilTest {
             number -> {
               for (int numBytes = 0; numBytes <= Integer.BYTES; ++numBytes) {
                 int result = IntegerUtil.clearHighBytes(number, numBytes);
+                int safeResult = IntegerUtil.clearHighBytesSafe(number, numBytes);
                 switch (numBytes) {
                   case 0:
                     assertEquals(result, 0);
+                    assertEquals(safeResult, 0);
                     break;
                   case 1:
                     assertEquals(result, number & 0xFF);
+                    assertEquals(safeResult, number & 0xFF);
                     break;
 
                   case 2:
                     assertEquals(result, number & 0xFFFF);
+                    assertEquals(safeResult, number & 0xFFFF);
                     break;
 
                   case 3:
                     assertEquals(result, number & 0xFFFFFF);
+                    assertEquals(safeResult, number & 0xFFFFFF);
                     break;
 
                   case 4:
                     assertEquals(result, (int) number);
+                    assertEquals(safeResult, (int) number);
                     break;
 
                   default:
@@ -235,6 +243,7 @@ public class IntegerUtilTest {
             number -> {
               for (int bit = 1, i = 0; bit != 0; bit <<= 1, ++i) {
                 assertEquals(IntegerUtil.isBitSet(number, i), (number & bit) != 0);
+                assertEquals(IntegerUtil.isBitSetSafe(number, i), (number & bit) != 0);
               }
             });
   }
@@ -246,6 +255,7 @@ public class IntegerUtilTest {
             number -> {
               for (int bit = 1, i = 0; bit != 0; bit <<= 1, ++i) {
                 assertEquals(IntegerUtil.getBit(number, i), (number & bit) >>> i);
+                assertEquals(IntegerUtil.getBitSafe(number, i), (number & bit) >>> i);
               }
             });
   }
@@ -260,6 +270,11 @@ public class IntegerUtilTest {
                   ++length, mask = (mask << 1) | 1) {
                 for (int start = 0; start < Integer.SIZE; ++start) {
                   assertEquals(IntegerUtil.getBitsSlice(number,
+                      start,
+                      start + length - 1),
+                      (number >>> start) & mask);
+
+                  assertEquals(IntegerUtil.getBitsSliceSafe(number,
                       start,
                       start + length - 1),
                       (number >>> start) & mask);
@@ -279,6 +294,13 @@ public class IntegerUtilTest {
                 for (int start = 0; start < Integer.SIZE; ++start) {
                   assertEquals(
                       IntegerUtil.setBitsSlice(
+                          number,
+                          start,
+                          start + length - 1),
+                      number | (mask << start));
+
+                  assertEquals(
+                      IntegerUtil.setBitsSliceSafe(
                           number,
                           start,
                           start + length - 1),
@@ -303,6 +325,13 @@ public class IntegerUtilTest {
                           start,
                           start + length - 1),
                       number & (~(mask << start)));
+
+                  assertEquals(
+                      IntegerUtil.clearBitsSliceSafe(
+                          number,
+                          start,
+                          start + length - 1),
+                      number & (~(mask << start)));
                 }
               }
             });
@@ -315,21 +344,26 @@ public class IntegerUtilTest {
             number -> {
               for (int byteIndex = 0; byteIndex < Integer.BYTES; ++byteIndex) {
                 byte result = IntegerUtil.getByte(number, byteIndex);
+                byte safeResult = IntegerUtil.getByteSafe(number, byteIndex);
                 switch (byteIndex) {
                   case 0:
                     assertEquals(result, (byte) (number & 0xFF));
+                    assertEquals(safeResult, (byte) (number & 0xFF));
                     break;
 
                   case 1:
                     assertEquals(result, (byte) ((number & 0xFF00) >>> 8));
+                    assertEquals(safeResult, (byte) ((number & 0xFF00) >>> 8));
                     break;
 
                   case 2:
                     assertEquals(result, (byte) ((number & 0xFF0000) >>> 16));
+                    assertEquals(safeResult, (byte) ((number & 0xFF0000) >>> 16));
                     break;
 
                   case 3:
                     assertEquals(result, (byte) ((number & 0xFF000000) >>> 24));
+                    assertEquals(safeResult, (byte) ((number & 0xFF000000) >>> 24));
                     break;
 
                   default:

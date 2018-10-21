@@ -52,8 +52,10 @@ public final class IntegerUtil {
       0xEFFFFFFF, 0xDFFFFFFF, 0xBFFFFFFF, 0x7FFFFFFF,
   };
 
-  private static void checkSliceIndexes(int startIndex, int stopIndex)
-  {
+  private IntegerUtil() {
+  }
+
+  private static void checkSliceIndexes(int startIndex, int stopIndex) {
     if (startIndex < 0 || startIndex >= Integer.SIZE) {
       throw new IllegalArgumentException(
           "startIndex parameter must be in the range [0, 31], but it's equal to " + startIndex);
@@ -74,9 +76,6 @@ public final class IntegerUtil {
       throw new IllegalArgumentException(
           "index parameter must be in the range[0, Integer.SIZE - 1], but it's equal to " + index);
     }
-  }
-
-  private IntegerUtil() {
   }
 
   public static int getBitsSlice(int value, int startIndex, int stopIndex) {

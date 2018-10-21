@@ -86,8 +86,10 @@ public final class LongUtil {
       0xFF00000000L, 0xFF0000000000L, 0xFF000000000000L, 0xFF00000000000000L
   };
 
-  private static void checkSliceIndexes(int startIndex, int stopIndex)
-  {
+  private LongUtil() {
+  }
+
+  private static void checkSliceIndexes(int startIndex, int stopIndex) {
     if (startIndex < 0 || startIndex >= Long.SIZE) {
       throw new IllegalArgumentException(
           "startIndex parameter must be in the range [0, 63], but it's equal to " + startIndex);
@@ -111,9 +113,6 @@ public final class LongUtil {
               Long.SIZE - 1,
               index));
     }
-  }
-
-  private LongUtil() {
   }
 
   public static long getBitsSlice(long value, int startIndex, int stopIndex) {

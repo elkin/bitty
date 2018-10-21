@@ -1,7 +1,9 @@
 package io.github.elkin.bitty;
 
 public final class BitUtil {
-  private BitUtil() {}
+
+  private BitUtil() {
+  }
 
   public static int getBitsSlice(int value, int startIndex, int stopIndex) {
     return IntegerUtil.getBitsSlice(value, startIndex, stopIndex);

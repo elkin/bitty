@@ -298,21 +298,21 @@ public class BitUtilTest {
   public void numberOfBytesInteger() {
     qt().forAll(SourceDSL.integers().all())
         .checkAssert(number -> assertEquals(BitUtil.numberOfBytes(number),
-                                            IntegerUtil.numberOfBytes(number)));
+            IntegerUtil.numberOfBytes(number)));
   }
 
   @Test
   public void numberOfBytesLong() {
     qt().forAll(SourceDSL.longs().all())
         .checkAssert(number -> assertEquals(BitUtil.numberOfBytes(number),
-                                            LongUtil.numberOfBytes(number)));
+            LongUtil.numberOfBytes(number)));
   }
 
   @Test
   public void numberOfBytesShort() {
     qt().forAll(SourceDSL.integers().between(Short.MIN_VALUE, Short.MAX_VALUE))
         .checkAssert(number -> assertEquals(BitUtil.numberOfBytes(number.shortValue()),
-                                            ShortUtil.numberOfBytes(number.shortValue())));
+            ShortUtil.numberOfBytes(number.shortValue())));
   }
 
   @Test

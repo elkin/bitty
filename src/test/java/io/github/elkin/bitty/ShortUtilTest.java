@@ -8,166 +8,139 @@ import static org.testng.Assert.fail;
 import org.testng.annotations.Test;
 
 public class ShortUtilTest {
-  
+
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void getBitsSliceNegativeStart()
-  {
-    ShortUtil.getBitsSliceSafe((short)0, -1, 1);
+  public void getBitsSliceNegativeStart() {
+    ShortUtil.getBitsSliceSafe((short) 0, -1, 1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void getBitsSliceStartIndexIsGreaterOrEqualToShortSize()
-  {
+  public void getBitsSliceStartIndexIsGreaterOrEqualToShortSize() {
     ShortUtil.getBitsSliceSafe((short) 0, Short.SIZE, Short.SIZE + 1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void getBitsSliceNegativeStopIndex()
-  {
+  public void getBitsSliceNegativeStopIndex() {
     ShortUtil.getBitsSliceSafe((short) 0, 1, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void getBitsSliceStopIndexIsLessThanStartIndex()
-  {
+  public void getBitsSliceStopIndexIsLessThanStartIndex() {
     ShortUtil.getBitsSliceSafe((short) 0, 3, 2);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void getBitsSliceDifferenceBetweenStopAndStartIsGreaterThanShortSize()
-  {
+  public void getBitsSliceDifferenceBetweenStopAndStartIsGreaterThanShortSize() {
     ShortUtil.getBitsSliceSafe((short) 0, 1, Short.SIZE + 2);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void setBitsSliceNegativeStart()
-  {
-    ShortUtil.setBitsSliceSafe((short)0, -1, 1);
+  public void setBitsSliceNegativeStart() {
+    ShortUtil.setBitsSliceSafe((short) 0, -1, 1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void setBitsSliceStartIndexIsGreaterOrEqualToShortSize()
-  {
+  public void setBitsSliceStartIndexIsGreaterOrEqualToShortSize() {
     ShortUtil.setBitsSliceSafe((short) 0, Short.SIZE, Short.SIZE + 1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void setBitsSliceNegativeStopIndex()
-  {
+  public void setBitsSliceNegativeStopIndex() {
     ShortUtil.setBitsSliceSafe((short) 0, 1, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void setBitsSliceStopIndexIsLessThanStartIndex()
-  {
+  public void setBitsSliceStopIndexIsLessThanStartIndex() {
     ShortUtil.setBitsSliceSafe((short) 0, 3, 2);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void setBitsSliceDifferenceBetweenStopAndStartIsGreaterThanShortSize()
-  {
+  public void setBitsSliceDifferenceBetweenStopAndStartIsGreaterThanShortSize() {
     ShortUtil.setBitsSliceSafe((short) 0, 1, Short.SIZE + 2);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void clearBitsSliceNegativeStart()
-  {
-    ShortUtil.clearBitsSliceSafe((short)0, -1, 1);
+  public void clearBitsSliceNegativeStart() {
+    ShortUtil.clearBitsSliceSafe((short) 0, -1, 1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void clearBitsSliceStartIndexIsGreaterOrEqualToShortSize()
-  {
+  public void clearBitsSliceStartIndexIsGreaterOrEqualToShortSize() {
     ShortUtil.clearBitsSliceSafe((short) 0, Short.SIZE, Short.SIZE + 1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void clearBitsSliceNegativeStopIndex()
-  {
+  public void clearBitsSliceNegativeStopIndex() {
     ShortUtil.clearBitsSliceSafe((short) 0, 1, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void clearBitsSliceStopIndexIsLessThanStartIndex()
-  {
+  public void clearBitsSliceStopIndexIsLessThanStartIndex() {
     ShortUtil.getBitsSliceSafe((short) 0, 3, 2);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void clearBitsSliceDifferenceBetweenStopAndStartIsGreaterThanShortSize()
-  {
+  public void clearBitsSliceDifferenceBetweenStopAndStartIsGreaterThanShortSize() {
     ShortUtil.clearBitsSliceSafe((short) 0, 1, Short.SIZE + 2);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void getBitNegativeIndex()
-  {
+  public void getBitNegativeIndex() {
     ShortUtil.getBitSafe((short) 0, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void getBitIndexIsGreaterOrEqualToIntegerSize()
-  {
+  public void getBitIndexIsGreaterOrEqualToIntegerSize() {
     ShortUtil.getBitSafe((short) 0, Short.SIZE);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void isBitSetNegativeIndex()
-  {
+  public void isBitSetNegativeIndex() {
     ShortUtil.isBitSetSafe((short) 0, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void isBitSetIndexIsGreaterOrEqualToIntegerSize()
-  {
+  public void isBitSetIndexIsGreaterOrEqualToIntegerSize() {
     ShortUtil.isBitSetSafe((short) 0, Short.SIZE);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void setBitNegativeIndex()
-  {
+  public void setBitNegativeIndex() {
     ShortUtil.setBitSafe((short) 0, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void setBitIndexIsGreaterOrEqualToIntegerSize()
-  {
+  public void setBitIndexIsGreaterOrEqualToIntegerSize() {
     ShortUtil.setBitSafe((short) 0, Short.SIZE);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void clearBitNegativeIndex()
-  {
+  public void clearBitNegativeIndex() {
     ShortUtil.clearBitSafe((short) 0, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void clearBitIndexIsGreaterOrEqualToIntegerSize()
-  {
+  public void clearBitIndexIsGreaterOrEqualToIntegerSize() {
     ShortUtil.clearBitSafe((short) 0, Short.SIZE);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void clearHighBytesNumBytesIsNegative()
-  {
+  public void clearHighBytesNumBytesIsNegative() {
     ShortUtil.clearHighBytesSafe((short) 0, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void clearHighBytesNumBytesIsGreaterThanIntegerBytes()
-  {
+  public void clearHighBytesNumBytesIsGreaterThanIntegerBytes() {
     ShortUtil.clearHighBytesSafe((short) 0, Short.BYTES + 1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void getByteNegativeIndex()
-  {
+  public void getByteNegativeIndex() {
     ShortUtil.getByteSafe((short) 0, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void getByteIndexIsGreaterOrEqualToIntegerBytes()
-  {
+  public void getByteIndexIsGreaterOrEqualToIntegerBytes() {
     ShortUtil.getByteSafe((short) 0, Short.BYTES);
   }
 
@@ -176,7 +149,7 @@ public class ShortUtilTest {
     qt().forAll(integers().between(Short.MIN_VALUE, Short.MAX_VALUE))
         .checkAssert(
             number -> {
-              for (short bit = 1, i = 0; bit != 0; bit = (short)(bit << 1), ++i) {
+              for (short bit = 1, i = 0; bit != 0; bit = (short) (bit << 1), ++i) {
                 assertEquals(ShortUtil.setBit(number.shortValue(), i), number | bit);
                 assertEquals(ShortUtil.setBitSafe(number.shortValue(), i), number | bit);
               }
@@ -188,7 +161,7 @@ public class ShortUtilTest {
     qt().forAll(integers().between(Short.MIN_VALUE, Short.MAX_VALUE))
         .checkAssert(
             number -> {
-              for (short bit = 1, i = 0; bit != 0; bit = (short)(bit << 1), ++i) {
+              for (short bit = 1, i = 0; bit != 0; bit = (short) (bit << 1), ++i) {
                 assertEquals(ShortUtil.clearBit(number.shortValue(), i), number & (~bit));
                 assertEquals(ShortUtil.clearBitSafe(number.shortValue(), i), number & (~bit));
               }
@@ -232,7 +205,7 @@ public class ShortUtilTest {
     qt().forAll(integers().between(Short.MIN_VALUE, Short.MAX_VALUE))
         .checkAssert(
             number -> {
-              for (short bit = 1, i = 0; bit != 0; bit = (short)(bit << 1), ++i) {
+              for (short bit = 1, i = 0; bit != 0; bit = (short) (bit << 1), ++i) {
                 assertEquals(
                     ShortUtil.isBitSet(number.shortValue(), i),
                     (number & bit) != 0);
@@ -302,14 +275,14 @@ public class ShortUtilTest {
                           number.shortValue(),
                           start,
                           start + length - 1),
-                      (short)(number | (mask << start)));
+                      (short) (number | (mask << start)));
 
                   assertEquals(
                       ShortUtil.setBitsSliceSafe(
                           number.shortValue(),
                           start,
                           start + length - 1),
-                      (short)(number | (mask << start)));
+                      (short) (number | (mask << start)));
                 }
               }
             });
@@ -329,14 +302,14 @@ public class ShortUtilTest {
                           number.shortValue(),
                           start,
                           start + length - 1),
-                      (short)(number & (~(mask << start))));
+                      (short) (number & (~(mask << start))));
 
                   assertEquals(
                       ShortUtil.clearBitsSliceSafe(
                           number.shortValue(),
                           start,
                           start + length - 1),
-                      (short)(number & (~(mask << start))));
+                      (short) (number & (~(mask << start))));
                 }
               }
             });
@@ -372,7 +345,7 @@ public class ShortUtilTest {
 
   @Test
   public void numberOfBytes() {
-    for (short bit = 1, i = 0; bit != 0; bit = (short)(bit << 1), ++i) {
+    for (short bit = 1, i = 0; bit != 0; bit = (short) (bit << 1), ++i) {
       assertEquals(ShortUtil.numberOfBytes(bit), (i / Byte.SIZE) + 1);
     }
   }

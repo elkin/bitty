@@ -31,8 +31,10 @@ public final class ShortUtil {
   };
 
 
-  private static void checkSliceIndexes(int startIndex, int stopIndex)
-  {
+  private ShortUtil() {
+  }
+
+  private static void checkSliceIndexes(int startIndex, int stopIndex) {
     if (startIndex < 0 || startIndex >= Short.SIZE) {
       throw new IllegalArgumentException(
           "startIndex parameter must be in the range [0, 15], but it's equal to " + startIndex);
@@ -56,10 +58,6 @@ public final class ShortUtil {
               Short.SIZE - 1,
               index));
     }
-  }
-
-
-  private ShortUtil() {
   }
 
   public static short getBitsSlice(short value, int startIndex, int stopIndex) {
@@ -158,7 +156,7 @@ public final class ShortUtil {
     if (index == 0) {
       return (byte) value;
     } else {
-        return (byte)(value >>> Byte.SIZE);
+      return (byte) (value >>> Byte.SIZE);
     }
   }
 

@@ -52,58 +52,93 @@ public final class IntegerUtil {
       0xEFFFFFFF, 0xDFFFFFFF, 0xBFFFFFFF, 0x7FFFFFFF,
   };
 
-  private static void checkSliceAsserts(int startIndex, int stopIndex)
+  private static void checkSliceIndexes(int startIndex, int stopIndex)
   {
-    assert startIndex >= 0;
-    assert startIndex < Integer.SIZE;
-    assert stopIndex >= 0;
-    assert stopIndex >= startIndex;
-    assert stopIndex - startIndex <= Integer.SIZE;
+    if (startIndex < 0 || startIndex >= Integer.SIZE) {
+      throw new IllegalArgumentException(
+          "startIndex parameter must be in the range [0, 31], but it's equal to " + startIndex);
+    }
+
+    if ((stopIndex < 0) || (stopIndex < startIndex) || (stopIndex - startIndex) > Integer.SIZE) {
+      throw new IllegalArgumentException(
+          "stopIndex parameter must be in the range [startIndex, startIndex + Integer.SIZE], "
+              + "but it's equal to "
+          + stopIndex);
+    }
+  }
+
+  private static void checkBitIndex(int index) {
+    if (index < 0 || index >= Integer.SIZE) {
+      throw new IllegalArgumentException(
+          "index parameter must be in the range[0, Integer.SIZE - 1], but it's equal to " + index);
+    }
   }
 
   private IntegerUtil() {
   }
 
   public static int getBitsSlice(int value, int startIndex, int stopIndex) {
-    checkSliceAsserts(startIndex, stopIndex);
     return (value & INT_MASKS[stopIndex]) >>> startIndex;
   }
 
+  public static int getBitsSliceSafe(int value, int startIndex, int stopIndex) {
+    checkSliceIndexes(startIndex, stopIndex);
+    return getBitsSlice(value, startIndex, stopIndex);
+  }
+
   public static int setBitsSlice(int value, int startIndex, int stopIndex) {
-    checkSliceAsserts(startIndex, stopIndex);
+    return value | (INT_MASKS[stopIndex - startIndex] << startIndex);
+  }
+
+  public static int setBitsSliceSafe(int value, int startIndex, int stopIndex) {
+    checkSliceIndexes(startIndex, stopIndex);
 
     return value | (INT_MASKS[stopIndex - startIndex] << startIndex);
   }
 
   public static int clearBitsSlice(int value, int startIndex, int stopIndex) {
-    checkSliceAsserts(startIndex, stopIndex);
+    return value & (~(INT_MASKS[stopIndex - startIndex] << startIndex));
+  }
+
+  public static int clearBitsSliceSafe(int value, int startIndex, int stopIndex) {
+    checkSliceIndexes(startIndex, stopIndex);
 
     return value & (~(INT_MASKS[stopIndex - startIndex] << startIndex));
   }
 
   public static int getBit(int value, int index) {
-    assert index >= 0;
-    assert index < Integer.SIZE;
+    return (value & INT_BIT_MASKS[index]) >>> index;
+  }
+
+  public static int getBitSafe(int value, int index) {
+    checkBitIndex(index);
     return (value & INT_BIT_MASKS[index]) >>> index;
   }
 
   public static boolean isBitSet(int value, int index) {
-    assert index >= 0;
-    assert index < Integer.SIZE;
+    return (value & INT_BIT_MASKS[index]) != 0;
+  }
+
+  public static boolean isBitSetSafe(int value, int index) {
+    checkBitIndex(index);
     return (value & INT_BIT_MASKS[index]) != 0;
   }
 
   public static int setBit(int value, int index) {
-    assert index >= 0;
-    assert index < Integer.SIZE;
+    return value | INT_BIT_MASKS[index];
+  }
 
+  public static int setBitSafe(int value, int index) {
+    checkBitIndex(index);
     return value | INT_BIT_MASKS[index];
   }
 
   public static int clearBit(int value, int index) {
-    assert index >= 0;
-    assert index < Integer.SIZE;
+    return value & INVERTED_INT_BIT_MASKS[index];
+  }
 
+  public static int clearBitSafe(int value, int index) {
+    checkBitIndex(index);
     return value & INVERTED_INT_BIT_MASKS[index];
   }
 
@@ -155,16 +190,29 @@ public final class IntegerUtil {
   }
 
   public static int clearHighBytes(int value, int numBytesToLeave) {
-    assert numBytesToLeave >= 0;
-    assert numBytesToLeave <= Integer.BYTES;
-
     return (value & BYTE_SLICE_MASKS[numBytesToLeave]);
   }
 
-  public static byte getByte(int value, int index) {
-    assert index >= 0;
-    assert index < Integer.BYTES;
+  public static int clearHighBytesSafe(int value, int numBytesToLeave) {
+    if (numBytesToLeave < 0 || numBytesToLeave > Integer.BYTES) {
+      throw new IllegalArgumentException(
+          "numberOfBytesToLeave parameter must be in the range [0, 4], but it's equal to "
+              + numBytesToLeave);
+    }
 
+    return clearHighBytes(value, numBytesToLeave);
+  }
+
+  public static byte getByte(int value, int index) {
     return (byte) ((value & BYTE_MASKS[index]) >>> (index << 3));
+  }
+
+  public static byte getByteSafe(int value, int index) {
+    if (index < 0 || index >= Integer.BYTES) {
+      throw new IllegalArgumentException(
+          "Index parameter must be in the range [0, 3], but it's equal to " + index);
+    }
+
+    return getByte(value, index);
   }
 }

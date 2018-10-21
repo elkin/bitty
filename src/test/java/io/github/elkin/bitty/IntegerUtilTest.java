@@ -8,167 +8,166 @@ import static org.testng.Assert.fail;
 import org.testng.annotations.Test;
 
 public class IntegerUtilTest {
-
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceNegativeStart()
   {
-    IntegerUtil.getBitsSlice(0, -1, 1);
+    IntegerUtil.getBitsSliceSafe(0, -1, 1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceStartIndexIsGreaterOrEqualToIntegerSize()
   {
-    IntegerUtil.getBitsSlice(0, Integer.SIZE, Integer.SIZE + 1);
+    IntegerUtil.getBitsSliceSafe(0, Integer.SIZE, Integer.SIZE + 1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceNegativeStopIndex()
   {
-    IntegerUtil.getBitsSlice(0, 1, -1);
+    IntegerUtil.getBitsSliceSafe(0, 1, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceStopIndexIsLessThanStartIndex()
   {
-    IntegerUtil.getBitsSlice(0, 3, 2);
+    IntegerUtil.getBitsSliceSafe(0, 3, 2);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceDifferenceBetweenStopAndStartIsGreaterThanIntegerSize()
   {
-    IntegerUtil.getBitsSlice(0, 1, Integer.SIZE + 2);
+    IntegerUtil.getBitsSliceSafe(0, 1, Integer.SIZE + 2);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceNegativeStart()
   {
-    IntegerUtil.setBitsSlice(0, -1, 1);
+    IntegerUtil.setBitsSliceSafe(0, -1, 1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceStartIndexIsGreaterOrEqualToIntegerSize()
   {
-    IntegerUtil.setBitsSlice(0, Integer.SIZE, Integer.SIZE + 1);
+    IntegerUtil.setBitsSliceSafe(0, Integer.SIZE, Integer.SIZE + 1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceNegativeStopIndex()
   {
-    IntegerUtil.setBitsSlice(0, 1, -1);
+    IntegerUtil.setBitsSliceSafe(0, 1, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceStopIndexIsLessThanStartIndex()
   {
-    IntegerUtil.setBitsSlice(0, 3, 2);
+    IntegerUtil.setBitsSliceSafe(0, 3, 2);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceDifferenceBetweenStopAndStartIsGreaterThanIntegerSize()
   {
-    IntegerUtil.setBitsSlice(0, 1, Integer.SIZE + 2);
+    IntegerUtil.setBitsSliceSafe(0, 1, Integer.SIZE + 2);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceNegativeStart()
   {
-    IntegerUtil.clearBitsSlice(0, -1, 1);
+    IntegerUtil.clearBitsSliceSafe(0, -1, 1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceStartIndexIsGreaterOrEqualToIntegerSize()
   {
-    IntegerUtil.clearBitsSlice(0, Integer.SIZE, Integer.SIZE + 1);
+    IntegerUtil.clearBitsSliceSafe(0, Integer.SIZE, Integer.SIZE + 1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceNegativeStopIndex()
   {
-    IntegerUtil.clearBitsSlice(0, 1, -1);
+    IntegerUtil.clearBitsSliceSafe(0, 1, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceStopIndexIsLessThanStartIndex()
   {
-    IntegerUtil.clearBitsSlice(0, 3, 2);
+    IntegerUtil.clearBitsSliceSafe(0, 3, 2);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceDifferenceBetweenStopAndStartIsGreaterThanIntegerSize()
   {
-    IntegerUtil.clearBitsSlice(0, 1, Integer.SIZE + 2);
+    IntegerUtil.clearBitsSliceSafe(0, 1, Integer.SIZE + 2);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitNegativeIndex()
   {
-    IntegerUtil.getBit(0, -1);
+    IntegerUtil.getBitSafe(0, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitIndexIsGreaterOrEqualToIntegerSize()
   {
-    IntegerUtil.getBit(0, Integer.SIZE);
+    IntegerUtil.getBitSafe(0, Integer.SIZE);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void isBitSetNegativeIndex()
   {
-    IntegerUtil.isBitSet(0, -1);
+    IntegerUtil.isBitSetSafe(0, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void isBitSetIndexIsGreaterOrEqualToIntegerSize()
   {
-    IntegerUtil.isBitSet(0, Integer.SIZE);
+    IntegerUtil.isBitSetSafe(0, Integer.SIZE);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitNegativeIndex()
   {
-    IntegerUtil.setBit(0, -1);
+    IntegerUtil.setBitSafe(0, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitIndexIsGreaterOrEqualToIntegerSize()
   {
-    IntegerUtil.setBit(0, Integer.SIZE);
+    IntegerUtil.setBitSafe(0, Integer.SIZE);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitNegativeIndex()
   {
-    IntegerUtil.clearBit(0, -1);
+    IntegerUtil.clearBitSafe(0, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitIndexIsGreaterOrEqualToIntegerSize()
   {
-    IntegerUtil.clearBit(0, Integer.SIZE);
+    IntegerUtil.clearBitSafe(0, Integer.SIZE);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearHighBytesNumBytesIsNegative()
   {
-    IntegerUtil.clearHighBytes(0, -1);
+    IntegerUtil.clearHighBytesSafe(0, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearHighBytesNumBytesIsGreaterThanIntegerBytes()
   {
-    IntegerUtil.clearHighBytes(0, Integer.BYTES + 1);
+    IntegerUtil.clearHighBytesSafe(0, Integer.BYTES + 1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getByteNegativeIndex()
   {
-    IntegerUtil.getByte(0, -1);
+    IntegerUtil.getByteSafe(0, -1);
   }
 
-  @Test(expectedExceptions = AssertionError.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void getByteIndexIsGreaterOrEqualToIntegerBytes()
   {
-    IntegerUtil.getByte(0, Integer.BYTES);
+    IntegerUtil.getByteSafe(0, Integer.BYTES);
   }
 
   @Test

@@ -422,6 +422,9 @@ public class BitUtilTest {
               assertEquals(
                   BitUtil.getBitsSlice(number, start, end),
                   IntegerUtil.getBitsSlice(number, start, end));
+              assertEquals(
+                  BitUtil.getBitsSliceSafe(number, start, end),
+                  IntegerUtil.getBitsSlice(number, start, end));
             }
           }
         });
@@ -435,6 +438,10 @@ public class BitUtilTest {
             for (int end = start + 1; end < Long.SIZE; ++end) {
               assertEquals(
                   BitUtil.getBitsSlice(number, start, end),
+                  LongUtil.getBitsSlice(number, start, end));
+
+              assertEquals(
+                  BitUtil.getBitsSliceSafe(number, start, end),
                   LongUtil.getBitsSlice(number, start, end));
             }
           }
@@ -450,6 +457,10 @@ public class BitUtilTest {
               assertEquals(
                   BitUtil.getBitsSlice(number.shortValue(), start, end),
                   ShortUtil.getBitsSlice(number.shortValue(), start, end));
+
+              assertEquals(
+                  BitUtil.getBitsSliceSafe(number.shortValue(), start, end),
+                  ShortUtil.getBitsSlice(number.shortValue(), start, end));
             }
           }
         });
@@ -463,6 +474,10 @@ public class BitUtilTest {
             for (int end = start + 1; end < Integer.SIZE; ++end) {
               assertEquals(
                   BitUtil.setBitsSlice(number, start, end),
+                  IntegerUtil.setBitsSlice(number, start, end));
+
+              assertEquals(
+                  BitUtil.setBitsSliceSafe(number, start, end),
                   IntegerUtil.setBitsSlice(number, start, end));
             }
           }
@@ -478,6 +493,10 @@ public class BitUtilTest {
               assertEquals(
                   BitUtil.setBitsSlice(number, start, end),
                   LongUtil.setBitsSlice(number, start, end));
+
+              assertEquals(
+                  BitUtil.setBitsSliceSafe(number, start, end),
+                  LongUtil.setBitsSlice(number, start, end));
             }
           }
         });
@@ -491,6 +510,10 @@ public class BitUtilTest {
             for (int end = start + 1; end < Short.SIZE; ++end) {
               assertEquals(
                   BitUtil.setBitsSlice(number.shortValue(), start, end),
+                  ShortUtil.setBitsSlice(number.shortValue(), start, end));
+
+              assertEquals(
+                  BitUtil.setBitsSliceSafe(number.shortValue(), start, end),
                   ShortUtil.setBitsSlice(number.shortValue(), start, end));
             }
           }
@@ -506,6 +529,10 @@ public class BitUtilTest {
               assertEquals(
                   BitUtil.clearBitsSlice(number, start, end),
                   IntegerUtil.clearBitsSlice(number, start, end));
+
+              assertEquals(
+                  BitUtil.clearBitsSliceSafe(number, start, end),
+                  IntegerUtil.clearBitsSlice(number, start, end));
             }
           }
         });
@@ -519,6 +546,10 @@ public class BitUtilTest {
             for (int end = start + 1; end < Long.SIZE; ++end) {
               assertEquals(
                   BitUtil.clearBitsSlice(number, start, end),
+                  LongUtil.clearBitsSlice(number, start, end));
+
+              assertEquals(
+                  BitUtil.clearBitsSliceSafe(number, start, end),
                   LongUtil.clearBitsSlice(number, start, end));
             }
           }
@@ -534,6 +565,10 @@ public class BitUtilTest {
               assertEquals(
                   BitUtil.clearBitsSlice(number.shortValue(), start, end),
                   ShortUtil.clearBitsSlice(number.shortValue(), start, end));
+
+              assertEquals(
+                  BitUtil.clearBitsSliceSafe(number.shortValue(), start, end),
+                  ShortUtil.clearBitsSlice(number.shortValue(), start, end));
             }
           }
         });
@@ -545,6 +580,7 @@ public class BitUtilTest {
         .checkAssert(number -> {
           for (int i = 0; i < Integer.SIZE; ++i) {
             assertEquals(BitUtil.getBit(number, i), IntegerUtil.getBit(number, i));
+            assertEquals(BitUtil.getBitSafe(number, i), IntegerUtil.getBit(number, i));
           }
         });
   }
@@ -555,6 +591,7 @@ public class BitUtilTest {
         .checkAssert(number -> {
           for (int i = 0; i < Long.SIZE; ++i) {
             assertEquals(BitUtil.getBit(number, i), LongUtil.getBit(number, i));
+            assertEquals(BitUtil.getBitSafe(number, i), LongUtil.getBit(number, i));
           }
         });
   }
@@ -567,6 +604,10 @@ public class BitUtilTest {
             assertEquals(
                 BitUtil.getBit(number.shortValue(), i),
                 ShortUtil.getBit(number.shortValue(), i));
+
+            assertEquals(
+                BitUtil.getBitSafe(number.shortValue(), i),
+                ShortUtil.getBit(number.shortValue(), i));
           }
         });
   }
@@ -577,6 +618,7 @@ public class BitUtilTest {
         .checkAssert(number -> {
           for (int i = 0; i < Integer.SIZE; ++i) {
             assertEquals(BitUtil.isBitSet(number, i), IntegerUtil.isBitSet(number, i));
+            assertEquals(BitUtil.isBitSetSafe(number, i), IntegerUtil.isBitSet(number, i));
           }
         });
   }
@@ -587,6 +629,7 @@ public class BitUtilTest {
         .checkAssert(number -> {
           for (int i = 0; i < Long.SIZE; ++i) {
             assertEquals(BitUtil.isBitSet(number, i), LongUtil.isBitSet(number, i));
+            assertEquals(BitUtil.isBitSetSafe(number, i), LongUtil.isBitSet(number, i));
           }
         });
   }
@@ -599,6 +642,10 @@ public class BitUtilTest {
             assertEquals(
                 BitUtil.isBitSet(number.shortValue(), i),
                 ShortUtil.isBitSet(number.shortValue(), i));
+
+            assertEquals(
+                BitUtil.isBitSetSafe(number.shortValue(), i),
+                ShortUtil.isBitSet(number.shortValue(), i));
           }
         });
   }
@@ -609,6 +656,7 @@ public class BitUtilTest {
         .checkAssert(number -> {
           for (int i = 0; i < Integer.SIZE; ++i) {
             assertEquals(BitUtil.setBit(number, i), IntegerUtil.setBit(number, i));
+            assertEquals(BitUtil.setBitSafe(number, i), IntegerUtil.setBit(number, i));
           }
         });
   }
@@ -619,6 +667,7 @@ public class BitUtilTest {
         .checkAssert(number -> {
           for (int i = 0; i < Long.SIZE; ++i) {
             assertEquals(BitUtil.setBit(number, i), LongUtil.setBit(number, i));
+            assertEquals(BitUtil.setBitSafe(number, i), LongUtil.setBit(number, i));
           }
         });
   }
@@ -631,6 +680,10 @@ public class BitUtilTest {
             assertEquals(
                 BitUtil.setBit(number.shortValue(), i),
                 ShortUtil.setBit(number.shortValue(), i));
+
+            assertEquals(
+                BitUtil.setBitSafe(number.shortValue(), i),
+                ShortUtil.setBit(number.shortValue(), i));
           }
         });
   }
@@ -641,6 +694,7 @@ public class BitUtilTest {
         .checkAssert(number -> {
           for (int i = 0; i < Integer.SIZE; ++i) {
             assertEquals(BitUtil.clearBit(number, i), IntegerUtil.clearBit(number, i));
+            assertEquals(BitUtil.clearBitSafe(number, i), IntegerUtil.clearBit(number, i));
           }
         });
   }
@@ -651,6 +705,7 @@ public class BitUtilTest {
         .checkAssert(number -> {
           for (int i = 0; i < Long.SIZE; ++i) {
             assertEquals(BitUtil.clearBit(number, i), LongUtil.clearBit(number, i));
+            assertEquals(BitUtil.clearBitSafe(number, i), LongUtil.clearBit(number, i));
           }
         });
   }
@@ -663,6 +718,10 @@ public class BitUtilTest {
             assertEquals(
                 BitUtil.clearBit(number.shortValue(), i),
                 ShortUtil.clearBit(number.shortValue(), i));
+
+            assertEquals(
+                BitUtil.clearBitSafe(number.shortValue(), i),
+                ShortUtil.clearBit(number.shortValue(), i));
           }
         });
   }
@@ -673,6 +732,8 @@ public class BitUtilTest {
         .checkAssert(number -> {
           for (int i = 0; i <= Integer.BYTES; ++i) {
             assertEquals(BitUtil.clearHighBytes(number, i), IntegerUtil.clearHighBytes(number, i));
+            assertEquals(BitUtil.clearHighBytesSafe(number, i),
+                         IntegerUtil.clearHighBytes(number, i));
           }
         });
   }
@@ -683,6 +744,8 @@ public class BitUtilTest {
         .checkAssert(number -> {
           for (int i = 0; i <= Long.BYTES; ++i) {
             assertEquals(BitUtil.clearHighBytes(number, i), LongUtil.clearHighBytes(number, i));
+            assertEquals(BitUtil.clearHighBytesSafe(number, i),
+                         LongUtil.clearHighBytes(number, i));
           }
         });
   }
@@ -694,6 +757,10 @@ public class BitUtilTest {
           for (int i = 0; i <= Short.BYTES; ++i) {
             assertEquals(
                 BitUtil.clearHighBytes(number.shortValue(), i),
+                ShortUtil.clearHighBytes(number.shortValue(), i));
+
+            assertEquals(
+                BitUtil.clearHighBytesSafe(number.shortValue(), i),
                 ShortUtil.clearHighBytes(number.shortValue(), i));
           }
         });
@@ -726,6 +793,7 @@ public class BitUtilTest {
         .checkAssert(number -> {
           for (int i = 0; i < Integer.BYTES; ++i) {
             assertEquals(BitUtil.getByte(number, i), IntegerUtil.getByte(number, i));
+            assertEquals(BitUtil.getByteSafe(number, i), IntegerUtil.getByte(number, i));
           }
         });
   }
@@ -736,6 +804,7 @@ public class BitUtilTest {
         .checkAssert(number -> {
           for (int i = 0; i < Long.BYTES; ++i) {
             assertEquals(BitUtil.getByte(number, i), LongUtil.getByte(number, i));
+            assertEquals(BitUtil.getByteSafe(number, i), LongUtil.getByte(number, i));
           }
         });
   }
@@ -747,6 +816,10 @@ public class BitUtilTest {
           for (int i = 0; i < Short.BYTES; ++i) {
             assertEquals(
                 BitUtil.getByte(number.shortValue(), i),
+                ShortUtil.getByte(number.shortValue(), i));
+
+            assertEquals(
+                BitUtil.getByteSafe(number.shortValue(), i),
                 ShortUtil.getByte(number.shortValue(), i));
           }
         });

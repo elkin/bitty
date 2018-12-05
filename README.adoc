@@ -7,9 +7,9 @@ bit manipulation library for Java and Kotlin
 
 == Supported types
 
-At the moment the library provides bit manipulation operations in Java for the following types only: `int`, `long`,
+At the moment the library provides bit manipulation operations for the following Java types only: `int`, `long`,
 `short`.
-Also it provides extension functions for Kotlin types: `Int`, `Long`, `Short`.
+Also it provides link:src/main/java/io/github/elkin/bitty/BitOperations.kt[extension functions] for Kotlin types: `Int`, `Long`, `Short`.
 
 == How it is organized
 
@@ -38,6 +38,13 @@ For each type(`int`, `long`, `short`) following bit manipulation operations are 
 * get byte
 * get number of non-zero bytes
 * clear higher order bytes
+
+By default arguments aren't validated.
+But for each operation there's a corresponding version that validates arguments.
+Such operations have suffix "Safe". For example:
+methods link:src/main/java/io/github/elkin/bitty/IntegerUtil.java#L81[IntegerUtil.getBitsSlice]
+and link:src/main/java/io/github/elkin/bitty/IntegerUtil.java#L85[IntegerUtil.getBitsSliceSafe].
+
 
 IMPORTANT: **Lowest bit and byte indexes are zero**.
 

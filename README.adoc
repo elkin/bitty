@@ -10,6 +10,10 @@ bit manipulation library for Java and Kotlin
 At the moment the library provides bit manipulation operations for the following Java types only: `int`, `long`,
 `short`.
 Also it provides link:src/main/java/io/github/elkin/bitty/BitOperations.kt[extension functions] for Kotlin types: `Int`, `Long`, `Short`.
+Kotlin supports operator overloading.
+It makes the code more concise.
+The library overrides link:https://kotlinlang.org/docs/reference/operator-overloading.html#indexed[indexed access operator] for slice and bit operations on the supported types.
+Look at the usage <<examples, examples>> below.
 
 == How it is organized
 
@@ -71,7 +75,12 @@ byte byteValue = BitUtil.getByte((short)0x8880, 1);
 ----
 235.getBitsSlice(2,4);
 
+// or the same using the get operator:
+235[2, 4]
+
 1024L.getBit(11)
+// using the get operator
+1024L[11]
 
 val shortValue = 128.toShort();
 shortValue.isBitSet(7);

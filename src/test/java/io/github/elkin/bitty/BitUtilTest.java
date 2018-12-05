@@ -145,137 +145,137 @@ public class BitUtilTest {
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceNegativeStartLong() {
-    BitUtil.getBitsSliceSafe(0, -1, 1);
+    BitUtil.getBitsSliceSafe(0L, -1, 1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceStartIndexIsGreaterOrEqualToLongSizeLong() {
-    BitUtil.getBitsSliceSafe(0, Long.SIZE, Long.SIZE + 1);
+    BitUtil.getBitsSliceSafe(0L, Long.SIZE, Long.SIZE + 1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceNegativeStopIndexLong() {
-    BitUtil.getBitsSliceSafe(0, 1, -1);
+    BitUtil.getBitsSliceSafe(0L, 1, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceStopIndexIsLessThanStartIndexLong() {
-    BitUtil.getBitsSliceSafe(0, 3, 2);
+    BitUtil.getBitsSliceSafe(0L, 3, 2);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitsSliceDifferenceBetweenStopAndStartIsGreaterThanLongSizeLong() {
-    BitUtil.getBitsSliceSafe(0, 1, Long.SIZE + 2);
+    BitUtil.getBitsSliceSafe(0L, 1, Long.SIZE + 2);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceNegativeStartLong() {
-    BitUtil.setBitsSliceSafe(0, -1, 1);
+    BitUtil.setBitsSliceSafe(0L, -1, 1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceStartIndexIsGreaterOrEqualToLongSizeLong() {
-    BitUtil.setBitsSliceSafe(0, Long.SIZE, Long.SIZE + 1);
+    BitUtil.setBitsSliceSafe(0L, Long.SIZE, Long.SIZE + 1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceNegativeStopIndexLong() {
-    BitUtil.setBitsSliceSafe(0, 1, -1);
+    BitUtil.setBitsSliceSafe(0L, 1, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceStopIndexIsLessThanStartIndexLong() {
-    BitUtil.setBitsSliceSafe(0, 3, 2);
+    BitUtil.setBitsSliceSafe(0L, 3, 2);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitsSliceDifferenceBetweenStopAndStartIsGreaterThanLongSizeLong() {
-    BitUtil.setBitsSliceSafe(0, 1, Long.SIZE + 2);
+    BitUtil.setBitsSliceSafe(0L, 1, Long.SIZE + 2);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceNegativeStartLong() {
-    BitUtil.clearBitsSliceSafe(0, -1, 1);
+    BitUtil.clearBitsSliceSafe(0L, -1, 1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceStartIndexIsGreaterOrEqualToLongSizeLong() {
-    BitUtil.clearBitsSliceSafe(0, Long.SIZE, Long.SIZE + 1);
+    BitUtil.clearBitsSliceSafe(0L, Long.SIZE, Long.SIZE + 1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceNegativeStopIndexLong() {
-    BitUtil.clearBitsSliceSafe(0, 1, -1);
+    BitUtil.clearBitsSliceSafe(0L, 1, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceStopIndexIsLessThanStartIndexLong() {
-    BitUtil.clearBitsSliceSafe(0, 3, 2);
+    BitUtil.clearBitsSliceSafe(0L, 3, 2);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitsSliceDifferenceBetweenStopAndStartIsGreaterThanLongSizeLong() {
-    BitUtil.clearBitsSliceSafe(0, 1, Long.SIZE + 2);
+    BitUtil.clearBitsSliceSafe(0L, 1, Long.SIZE + 2);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitNegativeIndexLong() {
-    BitUtil.getBitSafe(0, -1);
+    BitUtil.getBitSafe(0L, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void getBitIndexIsGreaterOrEqualToIntegerSizeLong() {
-    BitUtil.getBitSafe(0, Long.SIZE);
+    BitUtil.getBitSafe(0L, Long.SIZE);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void isBitSetNegativeIndexLong() {
-    BitUtil.isBitSetSafe(0, -1);
+    BitUtil.isBitSetSafe(0L, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void isBitSetIndexIsGreaterOrEqualToIntegerSizeLong() {
-    BitUtil.isBitSetSafe(0, Long.SIZE);
+    BitUtil.isBitSetSafe(0L, Long.SIZE);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitNegativeIndexLong() {
-    BitUtil.setBitSafe(0, -1);
+    BitUtil.setBitSafe(0L, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void setBitIndexIsGreaterOrEqualToIntegerSizeLong() {
-    BitUtil.setBitSafe(0, Long.SIZE);
+    BitUtil.setBitSafe(0L, Long.SIZE);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitNegativeIndexLong() {
-    BitUtil.clearBitSafe(0, -1);
+    BitUtil.clearBitSafe(0L, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearBitIndexIsGreaterOrEqualToIntegerSizeLong() {
-    BitUtil.clearBitSafe(0, Long.SIZE);
+    BitUtil.clearBitSafe(0L, Long.SIZE);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearHighBytesNumBytesIsNegativeLong() {
-    BitUtil.clearHighBytesSafe(0, -1);
+    BitUtil.clearHighBytesSafe(0L, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void clearHighBytesNumBytesIsGreaterThanIntegerBytesLong() {
-    BitUtil.clearHighBytesSafe(0, Long.BYTES + 1);
+    BitUtil.clearHighBytesSafe(0L, Long.BYTES + 1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void getByteNegativeIndexLong() {
-    BitUtil.getByteSafe(0, -1);
+    BitUtil.getByteSafe(0L, -1);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void getByteIndexIsGreaterOrEqualToIntegerBytesLong() {
-    BitUtil.getByteSafe(0, Long.BYTES);
+    BitUtil.getByteSafe(0L, Long.BYTES);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

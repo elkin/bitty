@@ -1,5 +1,7 @@
 package io.github.elkin.bitty
 
+// Int extensions functions
+
 fun Int.getBitsSlice(startIndex: Int, stopIndex: Int) = IntegerUtil.getBitsSlice(this, startIndex, stopIndex)
 
 fun Int.getBitsSliceSafe(startIndex: Int, stopIndex: Int) = IntegerUtil.getBitsSliceSafe(this, startIndex, stopIndex)
@@ -37,6 +39,13 @@ fun Int.clearHighBytesSafe(numBytesToLeave: Int) = IntegerUtil.clearHighBytesSaf
 fun Int.getByte(index: Int) = IntegerUtil.getByte(this, index)
 
 fun Int.getByteSafe(index: Int) = IntegerUtil.getByteSafe(this, index)
+
+// Int overloaded operators
+
+operator fun Int.get(startIndex: Int, stopIndex: Int): Int = IntegerUtil.getBitsSlice(this, startIndex, stopIndex)
+operator fun Int.get(index: Int): Int = IntegerUtil.getBit(this, index)
+
+// Long extension functions
 
 fun Long.getBitsSlice(startIndex: Int, stopIndex: Int) = LongUtil.getBitsSlice(this, startIndex, stopIndex)
 
@@ -76,6 +85,13 @@ fun Long.getByte(index: Int) = LongUtil.getByte(this, index)
 
 fun Long.getByteSafe(index: Int) = LongUtil.getByteSafe(this, index)
 
+// Long overloaded operators
+
+operator fun Long.get(startIndex: Int, stopIndex: Int): Long = LongUtil.getBitsSlice(this, startIndex, stopIndex)
+operator fun Long.get(index: Int): Long = LongUtil.getBit(this, index)
+
+// Short extension functions
+
 fun Short.getBitsSlice(startIndex: Int, stopIndex: Int) = ShortUtil.getBitsSlice(this, startIndex, stopIndex)
 
 fun Short.getBitsSliceSafe(startIndex: Int, stopIndex: Int) = ShortUtil.getBitsSliceSafe(this, startIndex, stopIndex)
@@ -114,3 +130,8 @@ fun Short.clearHighBytesSafe(numBytesToLeave: Int) = ShortUtil.clearHighBytesSaf
 fun Short.getByte(index: Int) = ShortUtil.getByte(this, index)
 
 fun Short.getByteSafe(index: Int) = ShortUtil.getByteSafe(this, index)
+
+// Short overloaded operators
+
+operator fun Short.get(startIndex: Int, stopIndex: Int): Short = ShortUtil.getBitsSlice(this, startIndex, stopIndex)
+operator fun Short.get(index: Int): Short = ShortUtil.getBit(this, index)

@@ -12,13 +12,11 @@ class BitOperationsKtTest {
             .checkAssert { number ->
                 for (start in 0 until Integer.SIZE - 1) {
                     for (end in start + 1 until Integer.SIZE) {
-                        assertEquals(
-                            number.getBitsSlice(start, end),
-                            IntegerUtil.getBitsSlice(number, start, end))
+                        val expectedResult = IntegerUtil.getBitsSlice(number, start, end)
 
-                        assertEquals(
-                            number.getBitsSliceSafe(start, end),
-                            IntegerUtil.getBitsSlice(number, start, end))
+                        assertEquals(number.getBitsSlice(start, end), expectedResult)
+                        assertEquals(number.getBitsSliceSafe(start, end), expectedResult)
+                        assertEquals(number[start, end], expectedResult)
                     }
                 }
             }
@@ -30,13 +28,11 @@ class BitOperationsKtTest {
             .checkAssert { number ->
                 for (start in 0 until java.lang.Long.SIZE - 1) {
                     for (end in start + 1 until java.lang.Long.SIZE) {
-                        assertEquals(
-                            number.getBitsSlice(start, end),
-                            LongUtil.getBitsSlice(number, start, end))
+                        val expectedResult = LongUtil.getBitsSlice(number, start, end)
 
-                        assertEquals(
-                            number.getBitsSliceSafe(start, end),
-                            LongUtil.getBitsSlice(number, start, end))
+                        assertEquals(number.getBitsSlice(start, end), expectedResult)
+                        assertEquals(number.getBitsSliceSafe(start, end), expectedResult)
+                        assertEquals(number[start, end], expectedResult)
                     }
                 }
             }
@@ -49,13 +45,11 @@ class BitOperationsKtTest {
                 for (start in 0 until java.lang.Short.SIZE - 1) {
                     for (end in start + 1 until java.lang.Short.SIZE) {
                         val num = number.toShort()
-                        assertEquals(
-                            num.getBitsSlice(start, end),
-                            ShortUtil.getBitsSlice(num, start, end))
+                        val expectedResult = ShortUtil.getBitsSlice(num, start, end)
 
-                        assertEquals(
-                            num.getBitsSliceSafe(start, end),
-                            ShortUtil.getBitsSlice(num, start, end))
+                        assertEquals(num.getBitsSlice(start, end), expectedResult)
+                        assertEquals(num.getBitsSliceSafe(start, end), expectedResult)
+                        assertEquals(num[start, end], expectedResult)
                     }
                 }
             }
@@ -179,6 +173,7 @@ class BitOperationsKtTest {
                 for (i in 0 until Integer.SIZE) {
                     assertEquals(number.getBit(i), IntegerUtil.getBit(number, i))
                     assertEquals(number.getBitSafe(i), IntegerUtil.getBit(number, i))
+                    assertEquals(number[i], IntegerUtil.getBit(number, i))
                 }
             }
     }
@@ -190,6 +185,7 @@ class BitOperationsKtTest {
                 for (i in 0 until java.lang.Long.SIZE) {
                     assertEquals(number.getBit(i), LongUtil.getBit(number, i))
                     assertEquals(number.getBitSafe(i), LongUtil.getBit(number, i))
+                    assertEquals(number[i], LongUtil.getBit(number, i))
                 }
             }
     }
@@ -200,13 +196,9 @@ class BitOperationsKtTest {
             .checkAssert { number ->
                 for (i in 0 until java.lang.Short.SIZE) {
                     val numShort = number.toShort()
-                    assertEquals(
-                        numShort.getBit(i),
-                        ShortUtil.getBit(numShort, i))
-
-                    assertEquals(
-                        numShort.getBitSafe(i),
-                        ShortUtil.getBit(numShort, i))
+                    assertEquals(numShort.getBit(i), ShortUtil.getBit(numShort, i))
+                    assertEquals(numShort.getBitSafe(i), ShortUtil.getBit(numShort, i))
+                    assertEquals(numShort[i], ShortUtil.getBit(numShort, i))
                 }
             }
     }

@@ -242,7 +242,7 @@ public class IntegerUtilTest {
               for (int length = 1, mask = 1;
                   length <= Integer.SIZE;
                   ++length, mask = (mask << 1) | 1) {
-                for (int start = 0; start < Integer.SIZE; ++start) {
+                for (int start = 0; start < Integer.SIZE - length; ++start) {
                   assertEquals(IntegerUtil.getBitsSlice(number,
                       start,
                       start + length - 1),
@@ -265,7 +265,7 @@ public class IntegerUtilTest {
               for (int length = 1, mask = 1;
                   length <= Integer.SIZE;
                   ++length, mask = (mask << 1) | 1) {
-                for (int start = 0; start < Integer.SIZE; ++start) {
+                for (int start = 0; start < Integer.SIZE - length; ++start) {
                   assertEquals(
                       IntegerUtil.setBitsSlice(
                           number,
@@ -292,7 +292,7 @@ public class IntegerUtilTest {
               for (int length = 1, mask = 1;
                   length <= Integer.SIZE;
                   ++length, mask = (mask << 1) | 1) {
-                for (int start = 0; start < Integer.SIZE; ++start) {
+                for (int start = 0; start < Integer.SIZE - length; ++start) {
                   assertEquals(
                       IntegerUtil.clearBitsSlice(
                           number,

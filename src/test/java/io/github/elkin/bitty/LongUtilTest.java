@@ -261,7 +261,7 @@ public class LongUtilTest {
               for (long length = 1, mask = 1;
                   length <= Long.SIZE;
                   ++length, mask = (mask << 1) | 1) {
-                for (int start = 0; start < Long.SIZE; ++start) {
+                for (int start = 0; start < Long.SIZE - length; ++start) {
                   assertEquals(LongUtil.getBitsSlice(number,
                       start,
                       (int) (start + length - 1)),
@@ -284,7 +284,7 @@ public class LongUtilTest {
               for (long length = 1, mask = 1;
                   length <= Long.SIZE;
                   ++length, mask = (mask << 1) | 1) {
-                for (int start = 0; start < Long.SIZE; ++start) {
+                for (int start = 0; start < Long.SIZE - length; ++start) {
                   assertEquals(
                       LongUtil.setBitsSlice(
                           number,
@@ -311,7 +311,7 @@ public class LongUtilTest {
               for (long length = 1, mask = 1;
                   length <= Long.SIZE;
                   ++length, mask = (mask << 1) | 1) {
-                for (int start = 0; start < Long.SIZE; ++start) {
+                for (int start = 0; start < Long.SIZE - length; ++start) {
                   assertEquals(
                       LongUtil.clearBitsSlice(
                           number,

@@ -1,91 +1,6 @@
 package io.github.elkin.bitty;
 
-public final class LongUtil {
-
-  private static final long[] LONG_MASKS = {
-      0x1L, 0x3L, 0x7L, 0xFL,
-      0x1FL, 0x3FL, 0x7FL, 0xFFL,
-      0x1FFL, 0x3FFL, 0x7FFL, 0xFFFL,
-      0x1FFFL, 0x3FFFL, 0x7FFFL, 0xFFFFL,
-      0x1FFFFL, 0x3FFFFL, 0x7FFFFL, 0xFFFFFL,
-      0x1FFFFFL, 0x3FFFFFL, 0x7FFFFFL, 0xFFFFFFL,
-      0x1FFFFFFL, 0x3FFFFFFL, 0x7FFFFFFL, 0xFFFFFFFL,
-      0x1FFFFFFFL, 0x3FFFFFFFL, 0x7FFFFFFFL, 0xFFFFFFFFL,
-      0x1FFFFFFFFL, 0x3FFFFFFFFL, 0x7FFFFFFFFL, 0xFFFFFFFFFL,
-      0x1FFFFFFFFFL, 0x3FFFFFFFFFL, 0x7FFFFFFFFFL, 0xFFFFFFFFFFL,
-      0x1FFFFFFFFFFL, 0x3FFFFFFFFFFL, 0x7FFFFFFFFFFL, 0xFFFFFFFFFFFL,
-      0x1FFFFFFFFFFFL, 0x3FFFFFFFFFFFL, 0x7FFFFFFFFFFFL, 0xFFFFFFFFFFFFL,
-      0x1FFFFFFFFFFFFL, 0x3FFFFFFFFFFFFL, 0x7FFFFFFFFFFFFL, 0xFFFFFFFFFFFFFL,
-      0x1FFFFFFFFFFFFFL, 0x3FFFFFFFFFFFFFL, 0x7FFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFL,
-      0x1FFFFFFFFFFFFFFL, 0x3FFFFFFFFFFFFFFL, 0x7FFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFL,
-      0x1FFFFFFFFFFFFFFFL, 0x3FFFFFFFFFFFFFFFL, 0x7FFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-      0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL,
-  };
-
-  private static final long[] LONG_BIT_MASKS = {
-      0x1L, 0x2L, 0x4L, 0x8L,
-      0x10L, 0x20L, 0x40L, 0x80L,
-      0x100L, 0x200L, 0x400L, 0x800L,
-      0x1000L, 0x2000L, 0x4000L, 0x8000L,
-      0x10000L, 0x20000L, 0x40000L, 0x80000L,
-      0x100000L, 0x200000L, 0x400000L, 0x800000L,
-      0x1000000L, 0x2000000L, 0x4000000L, 0x8000000L,
-      0x10000000L, 0x20000000L, 0x40000000L, 0x80000000L,
-      0x100000000L, 0x200000000L, 0x400000000L, 0x800000000L,
-      0x1000000000L, 0x2000000000L, 0x4000000000L, 0x8000000000L,
-      0x10000000000L, 0x20000000000L, 0x40000000000L, 0x80000000000L,
-      0x100000000000L, 0x200000000000L, 0x400000000000L, 0x800000000000L,
-      0x1000000000000L, 0x2000000000000L, 0x4000000000000L, 0x8000000000000L,
-      0x10000000000000L, 0x20000000000000L, 0x40000000000000L, 0x80000000000000L,
-      0x100000000000000L, 0x200000000000000L, 0x400000000000000L, 0x800000000000000L,
-      0x1000000000000000L, 0x2000000000000000L, 0x4000000000000000L, 0x8000000000000000L
-  };
-
-  private static final long[] INVERTED_LONG_BIT_MASKS = {
-      0xFFFFFFFFFFFFFFFEL, 0xFFFFFFFFFFFFFFFDL, 0xFFFFFFFFFFFFFFFBL, 0xFFFFFFFFFFFFFFF7L,
-      0xFFFFFFFFFFFFFFEFL, 0xFFFFFFFFFFFFFFDFL, 0xFFFFFFFFFFFFFFBFL, 0xFFFFFFFFFFFFFF7FL,
-      0xFFFFFFFFFFFFFEFFL, 0xFFFFFFFFFFFFFDFFL, 0xFFFFFFFFFFFFFBFFL, 0xFFFFFFFFFFFFF7FFL,
-      0xFFFFFFFFFFFFEFFFL, 0xFFFFFFFFFFFFDFFFL, 0xFFFFFFFFFFFFBFFFL, 0xFFFFFFFFFFFF7FFFL,
-      0xFFFFFFFFFFFEFFFFL, 0xFFFFFFFFFFFDFFFFL, 0xFFFFFFFFFFFBFFFFL, 0xFFFFFFFFFFF7FFFFL,
-      0xFFFFFFFFFFEFFFFFL, 0xFFFFFFFFFFDFFFFFL, 0xFFFFFFFFFFBFFFFFL, 0xFFFFFFFFFF7FFFFFL,
-      0xFFFFFFFFFEFFFFFFL, 0xFFFFFFFFFDFFFFFFL, 0xFFFFFFFFFBFFFFFFL, 0xFFFFFFFFF7FFFFFFL,
-      0xFFFFFFFFEFFFFFFFL, 0xFFFFFFFFDFFFFFFFL, 0xFFFFFFFFBFFFFFFFL, 0xFFFFFFFF7FFFFFFFL,
-      0xFFFFFFFEFFFFFFFFL, 0xFFFFFFFDFFFFFFFFL, 0xFFFFFFFBFFFFFFFFL, 0xFFFFFFF7FFFFFFFFL,
-      0xFFFFFFEFFFFFFFFFL, 0xFFFFFFDFFFFFFFFFL, 0xFFFFFFBFFFFFFFFFL, 0xFFFFFF7FFFFFFFFFL,
-      0xFFFFFEFFFFFFFFFFL, 0xFFFFFDFFFFFFFFFFL, 0xFFFFFBFFFFFFFFFFL, 0xFFFFF7FFFFFFFFFFL,
-      0xFFFFEFFFFFFFFFFFL, 0xFFFFDFFFFFFFFFFFL, 0xFFFFBFFFFFFFFFFFL, 0xFFFF7FFFFFFFFFFFL,
-      0xFFFEFFFFFFFFFFFFL, 0xFFFDFFFFFFFFFFFFL, 0xFFFBFFFFFFFFFFFFL, 0xFFF7FFFFFFFFFFFFL,
-      0xFFEFFFFFFFFFFFFFL, 0xFFDFFFFFFFFFFFFFL, 0xFFBFFFFFFFFFFFFFL, 0xFF7FFFFFFFFFFFFFL,
-      0xFEFFFFFFFFFFFFFFL, 0xFDFFFFFFFFFFFFFFL, 0xFBFFFFFFFFFFFFFFL, 0xF7FFFFFFFFFFFFFFL,
-      0xEFFFFFFFFFFFFFFFL, 0xDFFFFFFFFFFFFFFFL, 0xBFFFFFFFFFFFFFFFL, 0x7FFFFFFFFFFFFFFFL
-  };
-
-  private static final long[] BYTE_SLICE_MASKS = {
-      0L, 0xFFL, 0xFFFFL, 0xFFFFFFL, 0xFFFFFFFFL,
-      0xFFFFFFFFFFL, 0xFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFL, 0xFFFFFFFFFFFFFFFFL
-  };
-
-  private static final long[] BYTE_MASKS = {
-      0xFFL, 0xFF00L, 0xFF0000L, 0xFF000000L,
-      0xFF00000000L, 0xFF0000000000L, 0xFF000000000000L, 0xFF00000000000000L
-  };
-
+  public final class LongUtil {
   private LongUtil() {
   }
 
@@ -116,7 +31,7 @@ public final class LongUtil {
   }
 
   public static long getBitsSlice(long value, int startIndex, int stopIndex) {
-    return (value & LONG_MASKS[stopIndex]) >>> startIndex;
+    return (value & (-1L >>> (Long.SIZE - stopIndex - 1))) >>> startIndex;
   }
 
   public static long getBitsSliceSafe(long value, int startIndex, int stopIndex) {
@@ -125,7 +40,8 @@ public final class LongUtil {
   }
 
   public static long setBitsSlice(long value, int startIndex, int stopIndex) {
-    return value | (LONG_MASKS[stopIndex - startIndex] << startIndex);
+    final int length = stopIndex - startIndex + 1;
+    return value | ((-1L >>> (Long.SIZE - length)) << startIndex);
   }
 
   public static long setBitsSliceSafe(long value, int startIndex, int stopIndex) {
@@ -134,7 +50,8 @@ public final class LongUtil {
   }
 
   public static long clearBitsSlice(long value, int startIndex, int stopIndex) {
-    return value & (~(LONG_MASKS[stopIndex - startIndex] << startIndex));
+    final int length = stopIndex - startIndex + 1;
+    return value & ~((-1L >>> (Long.SIZE - length)) << startIndex);
   }
 
   public static long clearBitsSliceSafe(long value, int startIndex, int stopIndex) {
@@ -143,7 +60,7 @@ public final class LongUtil {
   }
 
   public static long getBit(long value, int index) {
-    return (value & LONG_BIT_MASKS[index]) >>> index;
+    return (value >>> index) & 1;
   }
 
   public static long getBitSafe(long value, int index) {
@@ -152,7 +69,7 @@ public final class LongUtil {
   }
 
   public static boolean isBitSet(long value, int index) {
-    return (value & LONG_BIT_MASKS[index]) != 0;
+    return ((value >>> index) & 1) != 0;
   }
 
   public static boolean isBitSetSafe(long value, int index) {
@@ -161,7 +78,7 @@ public final class LongUtil {
   }
 
   public static long setBit(long value, int index) {
-    return value | LONG_BIT_MASKS[index];
+    return value | (1L << index);
   }
 
   public static long setBitSafe(long value, int index) {
@@ -170,7 +87,7 @@ public final class LongUtil {
   }
 
   public static long clearBit(long value, int index) {
-    return value & INVERTED_LONG_BIT_MASKS[index];
+    return value & (~(1L << index));
   }
 
   public static long clearBitSafe(long value, int index) {
@@ -266,7 +183,7 @@ public final class LongUtil {
   }
 
   public static byte getByte(long value, int index) {
-    return (byte) ((value & BYTE_MASKS[index]) >>> (index << 3));
+     return (byte)(value >>> Byte.SIZE * index);
   }
 
   public static byte getByteSafe(long value, int index) {
@@ -279,7 +196,37 @@ public final class LongUtil {
   }
 
   public static long clearHighBytes(long value, int numBytesToLeave) {
-    return (value & BYTE_SLICE_MASKS[numBytesToLeave]);
+
+    switch (numBytesToLeave) {
+      default:
+      case 0:
+        return 0L;
+
+      case 1:
+        return value & 0xFFL;
+
+      case 2:
+        return value & 0xFFFFL;
+
+
+      case 3:
+        return value & 0xFFFFFFL;
+
+      case 4:
+        return value & 0xFFFFFFFFL;
+
+      case 5:
+        return value & 0xFFFFFFFFFFL;
+
+      case 6:
+        return value & 0xFFFFFFFFFFFFL;
+
+      case 7:
+        return value & 0xFFFFFFFFFFFFFFL;
+
+      case 8:
+        return value;
+    }
   }
 
   public static long clearHighBytesSafe(long value, int numBytesToLeave) {

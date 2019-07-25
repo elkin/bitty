@@ -242,7 +242,7 @@ public class ShortUtilTest {
               for (int length = 1, mask = 1;
                   length <= Short.SIZE;
                   ++length, mask = (mask << 1) | 1) {
-                for (int start = 0; start < Short.SIZE; ++start) {
+                for (int start = 0; start < Short.SIZE - length; ++start) {
                   assertEquals(
                       ShortUtil.getBitsSlice(
                           number.shortValue(),
@@ -269,7 +269,7 @@ public class ShortUtilTest {
               for (int length = 1, mask = 1;
                   length <= Short.SIZE;
                   ++length, mask = (mask << 1) | 1) {
-                for (int start = 0; start < Short.SIZE; ++start) {
+                for (int start = 0; start < Short.SIZE - length; ++start) {
                   assertEquals(
                       ShortUtil.setBitsSlice(
                           number.shortValue(),
@@ -296,7 +296,7 @@ public class ShortUtilTest {
               for (int length = 1, mask = 1;
                   length <= Short.SIZE;
                   ++length, mask = (mask << 1) | 1) {
-                for (int start = 0; start < Short.SIZE; ++start) {
+                for (int start = 0; start < Short.SIZE - length; ++start) {
                   assertEquals(
                       ShortUtil.clearBitsSlice(
                           number.shortValue(),

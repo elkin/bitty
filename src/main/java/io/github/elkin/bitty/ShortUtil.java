@@ -1,36 +1,6 @@
 package io.github.elkin.bitty;
 
 public final class ShortUtil {
-
-  private static final int[] SHORT_MASKS = {
-      0x1, 0x3, 0x7, 0xF,
-      0x1F, 0x3F, 0x7F, 0xFF,
-      0x1FF, 0x3FF, 0x7FF, 0xFFF,
-      0x1FFF, 0x3FFF, 0x7FFF, 0xFFFF,
-
-      0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
-      0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
-      0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
-      0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF
-  };
-
-  private static final int[] BYTE_SLICE_MASKS = {0, 0xFF, 0xFFFF};
-
-  private static final int[] SHORT_BIT_MASKS = {
-      0x1, 0x2, 0x4, 0x8,
-      0x10, 0x20, 0x40, 0x80,
-      0x100, 0x200, 0x400, 0x800,
-      0x1000, 0x2000, 0x4000, 0x8000,
-  };
-
-  private static final int[] INVERTED_SHORT_BIT_MASKS = {
-      0xFFFE, 0xFFFD, 0xFFFB, 0xFFF7,
-      0xFFEF, 0xFFDF, 0xFFBF, 0xFF7F,
-      0xFEFF, 0xFDFF, 0xFBFF, 0xF7FF,
-      0xEFFF, 0xDFFF, 0xBFFF, 0x7FFF,
-  };
-
-
   private ShortUtil() {
   }
 
@@ -61,7 +31,7 @@ public final class ShortUtil {
   }
 
   public static short getBitsSlice(short value, int startIndex, int stopIndex) {
-    return (short) ((value & SHORT_MASKS[stopIndex]) >>> startIndex);
+    return (short) ((value & (-1 >>> (Integer.SIZE - stopIndex - 1))) >>> startIndex);
   }
 
   public static short getBitsSliceSafe(short value, int startIndex, int stopIndex) {
@@ -71,7 +41,8 @@ public final class ShortUtil {
   }
 
   public static short setBitsSlice(short value, int startIndex, int stopIndex) {
-    return (short) (value | (SHORT_MASKS[stopIndex - startIndex] << startIndex));
+    final int length = stopIndex - startIndex + 1;
+    return (short) (value | ((-1 >>> (Integer.SIZE - length)) << startIndex));
   }
 
   public static short setBitsSliceSafe(short value, int startIndex, int stopIndex) {
@@ -81,7 +52,8 @@ public final class ShortUtil {
   }
 
   public static short clearBitsSlice(short value, int startIndex, int stopIndex) {
-    return (short) (value & (~(SHORT_MASKS[stopIndex - startIndex] << startIndex)));
+    final int length = stopIndex - startIndex + 1;
+    return (short) (value & ~((-1 >>> (Integer.SIZE - length)) << startIndex));
   }
 
   public static short clearBitsSliceSafe(short value, int startIndex, int stopIndex) {
@@ -91,7 +63,7 @@ public final class ShortUtil {
   }
 
   public static short getBit(short value, int index) {
-    return (short) ((value & SHORT_BIT_MASKS[index]) >>> index);
+    return (short) ((value >>> index) & 1);
   }
 
   public static short getBitSafe(short value, int index) {
@@ -100,7 +72,7 @@ public final class ShortUtil {
   }
 
   public static boolean isBitSet(short value, int index) {
-    return (value & SHORT_BIT_MASKS[index]) != 0;
+    return ((short)(value >>> index) & 1) != 0;
   }
 
   public static boolean isBitSetSafe(short value, int index) {
@@ -109,7 +81,7 @@ public final class ShortUtil {
   }
 
   public static short setBit(short value, int index) {
-    return (short) (value | SHORT_BIT_MASKS[index]);
+    return (short) (value | (1 << index));
   }
 
   public static short setBitSafe(short value, int index) {
@@ -118,7 +90,7 @@ public final class ShortUtil {
   }
 
   public static short clearBit(short value, int index) {
-    return (short) (value & INVERTED_SHORT_BIT_MASKS[index]);
+    return (short) (value & (~(1 << index)));
   }
 
   public static short clearBitSafe(short value, int index) {
@@ -139,7 +111,17 @@ public final class ShortUtil {
   }
 
   public static short clearHighBytes(short value, int numBytesToLeave) {
-    return (short) (value & BYTE_SLICE_MASKS[numBytesToLeave]);
+    switch (numBytesToLeave) {
+      default:
+      case 0:
+        return 0;
+
+        case 1:
+        return (short) (value & 0xFF);
+
+      case 2:
+        return (short) (value & 0xFFFF);
+    }
   }
 
   public static short clearHighBytesSafe(short value, int numBytesToLeave) {
